@@ -1,5 +1,4 @@
 # c301assignment1
-#http://www.wikihow.com/Write-a-Read-Me 2015/01/13
 Travel app version 1.0 2015/01/13
 
 GENERAL USAGE NOTES
