@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <EditText
+        android:id="@+id/editEnterDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEnterCategory"
+        android:layout_below="@+id/editEnterCategory"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:text="Enter Description"
+        android:textColor="#ffffffff" />
+
+    <EditText
+        android:id="@+id/editEnterAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEnterDate"
+        android:layout_below="@+id/editEnterDate"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Enter Amount"
+        android:textColor="#ffffffff" />
+
+    <EditText
+        android:id="@+id/editEnterCurr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEnterAmount"
+        android:layout_below="@+id/editEnterAmount"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:text="Enter Currency (CUR)"
+        android:textColor="#ffffffff" />
+
+    <EditText
+        android:id="@+id/editEnterDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEnterDescription"
+        android:layout_below="@+id/editEnterDescription"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="date"
+        android:text="Enter Date"
+        android:textColor="#ffffffff" />
+
+    <EditText
+        android:id="@+id/editEnterItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="70dp"
+        android:ems="10"
+        android:text="Enter Expense Name"
+        android:textColor="#ffffffff" />
+
+    <EditText
+        android:id="@+id/editEnterCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editEnterItemName"
+        android:layout_below="@+id/editEnterItemName"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:text="Enter Category"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textNewExpenseItemHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="New Expense Item"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffffff" />
+
+</RelativeLayout>
