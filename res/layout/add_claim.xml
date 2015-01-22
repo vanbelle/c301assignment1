@@ -13,7 +13,7 @@
         android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Enter Description"
+        android:text="@string/Enter_Description"
         android:textColor="#ffffffff" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_marginTop="26dp"
         android:ems="10"
         android:inputType="date"
-        android:text="Enter Start Date"
+        android:text="@string/Enter_Start_Date"
         android:textColor="#ffffffff" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="date"
-        android:text="Enter End Date"
+        android:text="@string/Enter_End_Date"
         android:textColor="#ffffffff" />
 
     <EditText
@@ -48,8 +48,9 @@
         android:layout_below="@+id/EnterEndDate"
         android:layout_marginTop="38dp"
         android:ems="10"
-        android:text="Enter Status"
-        android:textColor="#ffffffff" />
+        android:text="@string/Enter_Status"
+        android:textColor="#ffffffff"
+    	android:inputType="text" />
 
     <EditText
         android:id="@+id/EnterClaimName"
@@ -60,8 +61,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="80dp"
         android:ems="10"
-        android:text="Enter ClaimName"
-        android:textColor="#ffffffff" >
+        android:text="@string/Enter_Claim_Name"
+        android:textColor="#ffffffff" 
+        android:inputType="text">
 
         <requestFocus />
     </EditText>
@@ -73,7 +75,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="New Claim"
+        android:text="@string/New_Claim"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff" />
 

@@ -23,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Date-Date"
+        android:text="@string/Date_Date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#ffffffff" />
 
@@ -35,7 +35,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textStarttoEndDate"
         android:layout_marginTop="16dp"
-        android:text="Claim Name  (Status)"
+        android:text="@string/CN_Status"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff" />
 
@@ -49,7 +49,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textClaimDescription"
         android:onClick="addItemAction"
-        android:text="Add Expense Item"
+        android:text="@string/Add_Expense_Item"
         android:textColor="#ffffffff" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textClaimName"
-        android:text="Total"
+        android:text="@string/Total"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffffff" />
 
@@ -71,7 +71,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textClaimTotal"
         android:layout_marginTop="21dp"
-        android:text="Description"
+        android:text="@string/Description"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffffff" />
 

@@ -10,11 +10,10 @@ public class Claim {
 	public Date StartDate;
 	public Date EndDate;
 	public ArrayList<ExpenseItem> EItems;
-	public ArrayList<Integer> TotalSum;
+	public ArrayList<Amt_Cur> TotalSum;
 	
 	public Claim(String ClaimName, Date StartDate, Date EndDate, String Status, String Description) {
 		this.EItems = new ArrayList<ExpenseItem>(); 
-		this.TotalSum = new ArrayList<Integer>();
 		this.ClaimName = ClaimName;
 		this.StartDate = StartDate;
 		this.EndDate = EndDate;
@@ -22,15 +21,34 @@ public class Claim {
 		this.Status = Status;	
 	}
 	
-	public void deleteClaim(String ClaimName) {
-		//TODO delete item
+	public void addItem(String ItemName, String Category, String Description, Date Date, Integer Amount, String Currency) {
+		ExpenseItem Item = new ExpenseItem(ItemName, Category,Description, Date, Amount,Currency);
 	}
-	
+		
 	public ArrayList<ExpenseItem> getEItems() {
 		return EItems;
 	}
 		
-	public ArrayList<Integer> getTotalSum() {
+	public ArrayList<Amt_Cur> getTotalSum() {
+		this.TotalSum = new ArrayList<Amt_Cur>();
+		for (int i = 0; i < EItems.size(); i++){
+			ExpenseItem Item = EItems.get(i);
+			Amt_Cur amtcur = Item.getAmt_Cur();
+			String cur = amtcur.getCurrency();
+			for (int j = 0; j < TotalSum.size(); j++) {
+				if (TotalSum.get(j).getCurrency() == cur) {
+					Integer a = TotalSum.get(j).getAmount();
+					a = a + amtcur.getAmount();
+					TotalSum.remove(j);
+					Amt_Cur combined = new Amt_Cur(a, cur);
+					TotalSum.add(combined);				
+				}
+				else {
+					TotalSum.add(amtcur);
+				}
+			}
+			
+		}
 		return TotalSum;
 	}
 	

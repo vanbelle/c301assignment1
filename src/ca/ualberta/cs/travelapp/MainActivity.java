@@ -17,12 +17,16 @@ limitations under the License.
 
 package ca.ualberta.cs.travelapp;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 
@@ -35,11 +39,16 @@ public class MainActivity extends Activity {
         
         ListView claimlistview = (ListView) findViewById(R.id.listofClaimItems);
         
-        ArrayAdapter<Claim> ClaimListadapter = new ArrayAdapter<Claim>(this,android.R.layout.simple_list_item_1, claimlist); 
+        //ArrayAdapter<Claim> ClaimListadapter = new ArrayAdapter<Claim>(this,android.R.layout.simple_list_item_1, claimlist); 
         
-        //setting up button reference
+        //setting up add claim button reference
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
-        
+		claimbutton.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				
+			}
+		});
     }
 
 
