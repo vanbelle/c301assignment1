@@ -60,6 +60,5 @@ public class ExpenseItem {
 		//TODO check status
 		Currency = currency;
 	}
-
 	
 }

@@ -21,6 +21,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 
 public class MainActivity extends Activity {
@@ -29,6 +32,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        ListView claimlistview = (ListView) findViewById(R.id.listofClaimItems);
+        
+        ArrayAdapter<Claim> ClaimListadapter = new ArrayAdapter<Claim>(this,android.R.layout.simple_list_item_1, claimlist); 
+        
+        //setting up button reference
+        Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
+        
     }
 
 

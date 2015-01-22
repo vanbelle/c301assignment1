@@ -12,14 +12,14 @@ public class Claim {
 	public ArrayList<ExpenseItem> EItems;
 	public ArrayList<Integer> TotalSum;
 	
-	public Claim() {
-		EItems = new ArrayList<ExpenseItem>(); 
-		TotalSum = new ArrayList<Integer>();
-	}
-	
-	public void addClaim(String ClaimName, Date StartDate, Date EndDate, String Description) {
-		//TODO add item
-		//TODO add amount and name into lists
+	public Claim(String ClaimName, Date StartDate, Date EndDate, String Status, String Description) {
+		this.EItems = new ArrayList<ExpenseItem>(); 
+		this.TotalSum = new ArrayList<Integer>();
+		this.ClaimName = ClaimName;
+		this.StartDate = StartDate;
+		this.EndDate = EndDate;
+		this.Description = Description;
+		this.Status = Status;	
 	}
 	
 	public void deleteClaim(String ClaimName) {
@@ -29,7 +29,7 @@ public class Claim {
 	public ArrayList<ExpenseItem> getEItems() {
 		return EItems;
 	}
-	
+		
 	public ArrayList<Integer> getTotalSum() {
 		return TotalSum;
 	}
@@ -39,35 +39,35 @@ public class Claim {
 	}
 	public void setClaimName(String claimName) {
 		//TODO check status
-		ClaimName = claimName;
+		this.ClaimName = claimName;
 	}
 	public String getStatus() {
 		return Status;
 	}
 	public void setStatus(String status) {
 		//TODO check status
-		Status = status;
+		this.Status = status;
 	}
 	public String getDescription() {
 		return Description;
 	}
 	public void setDescription(String description) {
 		//TODO check status
-		Description = description;
+		this.Description = description;
 	}
 	public Date getStartDate() {
 		return StartDate;
 	}
 	public void setStartDate(Date startDate) {
 		//TODO check status
-		StartDate = startDate;
+		this.StartDate = startDate;
 	}
 	public Date getEndDate() {
 		return EndDate;
 	}
 	public void setEndDate(Date endDate) {
 		//TODO check status
-		EndDate = endDate;
+		this.EndDate = endDate;
 	}
 	
 	
