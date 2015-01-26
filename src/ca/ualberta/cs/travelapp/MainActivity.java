@@ -17,39 +17,48 @@ limitations under the License.
 
 package ca.ualberta.cs.travelapp;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 
-
-public class MainActivity extends Activity {
-
+public class MainActivity extends Activity implements View.OnClickListener{
+	HashMap<String, ArrayList<Amt_Cur>> claimlist;
+	ArrayList<String> claims;
+	ExpandableListView Exp_List;
+	ClaimAdapter adapter;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        ListView claimlistview = (ListView) findViewById(R.id.listofClaimItems);
+        //for expandable list
+        Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
+//      claimlist = ClaimList.getInfo();
+//      claims = new ArrayList<String>(claimlist.keySet());
+//      adapter = new ClaimAdapter(this, claimlist, claims);
+//      Exp_List.setAdapter(adapter);
         
-        //ArrayAdapter<Claim> ClaimListadapter = new ArrayAdapter<Claim>(this,android.R.layout.simple_list_item_1, claimlist); 
-        
-        //setting up add claim button reference
+        //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
-		claimbutton.setOnClickListener(new View.OnClickListener() {
-
+		claimbutton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(MainActivity.this, AddClaimActivity.class);
+				startActivity(intent);				
 			}
 		});
     }
+				
 
 
     @Override
@@ -70,4 +79,14 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+	@Override
+	public void onClick(View v)
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,68 +2,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:background="@drawable/capture" >
 
     <EditText
         android:id="@+id/EnterDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/EnterClaimName"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EnterClaimName"
         android:layout_below="@+id/EnterClaimName"
         android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/Enter_Description"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/EnterStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/EnterClaimName"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EnterClaimName"
         android:layout_below="@+id/EnterDescription"
         android:layout_marginTop="26dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="text"
         android:text="@string/Enter_Start_Date"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/EnterEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/EnterStartDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EnterStartDate"
         android:layout_below="@+id/EnterStartDate"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="text"
         android:text="@string/Enter_End_Date"
-        android:textColor="#ffffffff" />
-
-    <EditText
-        android:id="@+id/editEnterItemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/EnterEndDate"
-        android:layout_below="@+id/EnterEndDate"
-        android:layout_marginTop="38dp"
-        android:ems="10"
-        android:text="@string/Enter_Status"
-        android:textColor="#ffffffff"
-    	android:inputType="text" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/EnterClaimName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:ems="10"
+        android:inputType="text"
         android:text="@string/Enter_Claim_Name"
-        android:textColor="#ffffffff" 
-        android:inputType="text">
+        android:textColor="#000" >
 
         <requestFocus />
     </EditText>
@@ -77,6 +74,17 @@
         android:layout_marginTop="30dp"
         android:text="@string/New_Claim"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/editEnterStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/EnterEndDate"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/EnterEndDate"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:text="@string/Enter_Status" />
 
 </RelativeLayout>

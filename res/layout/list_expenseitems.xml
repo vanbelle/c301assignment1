@@ -2,42 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
-
-    <ListView
-        android:id="@+id/listofExpenseItems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/AddExpenseItemButton"
-        android:paddingBottom="20dp" >
-
-    </ListView>
-
-    <TextView
-        android:id="@+id/textStarttoEndDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/Date_Date"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffffff" />
-
-    <TextView
-        android:id="@+id/textClaimName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textStarttoEndDate"
-        android:layout_marginTop="16dp"
-        android:text="@string/CN_Status"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+    android:background="@drawable/capture" >
 
     <Button
         android:id="@+id/AddExpenseItemButton"
@@ -47,21 +12,93 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textClaimDescription"
+        android:layout_below="@+id/listTotalSum"
         android:onClick="addItemAction"
         android:text="@string/Add_Expense_Item"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <TextView
-        android:id="@+id/textClaimTotal"
+        android:id="@+id/textClaimName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textClaimName"
-        android:text="@string/Total"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ffffffff" />
+        android:layout_below="@+id/textStarttoEndDate"
+        android:layout_marginTop="56dp"
+        android:text="@string/CN_Status"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/buttonemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textClaimDescription"
+        android:layout_alignEnd="@+id/textClaimDescription"
+        android:layout_below="@+id/textStarttoEndDate"
+        android:text="@string/email" />
+
+    <Button
+        android:id="@+id/buttondelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonemail"
+        android:layout_alignBottom="@+id/buttonemail"
+        android:layout_centerHorizontal="true"
+        android:text="@string/delete" />
+
+    <Button
+        android:id="@+id/buttonedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttondelete"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:text="@string/edit" />
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listExpenseItems"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/AddExpenseItemButton"
+        android:layout_marginBottom="16dp"
+        android:visibility="visible" >
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/listTotalSum"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textClaimDescription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="visible" >
+
+    </ListView>
 
     <TextView
         android:id="@+id/textClaimDescription"
@@ -69,10 +106,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textClaimTotal"
-        android:layout_marginTop="21dp"
+        android:layout_below="@+id/textClaimName"
+        android:layout_marginTop="16dp"
         android:text="@string/Description"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textStarttoEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout1"
+        android:text="@string/Date_Date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000" />
 
 </RelativeLayout>

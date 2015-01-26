@@ -9,9 +9,7 @@ public class Amt_Cur
 		this.Amount = Amount;
 		this.Currency = Currency;	
 	}
-	//TODO check status??
 	public Integer getAmount() {
-	
 		return Amount;
 	}
 	
@@ -20,12 +18,10 @@ public class Amt_Cur
 	}
 	
 	public String getCurrency() {
-	
 		return Currency;
 	}
 	
 	public void setCurrency(String currency){
-	
 		this.Currency = currency;
 	}
 }

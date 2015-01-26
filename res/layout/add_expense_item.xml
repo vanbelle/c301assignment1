@@ -2,80 +2,93 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:background="@drawable/capture" >
 
     <EditText
         android:id="@+id/editEnterDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterCategory"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/editEnterCategory"
         android:layout_below="@+id/editEnterCategory"
         android:layout_marginTop="21dp"
         android:ems="10"
-        android:text="@string/Enter_Description"
         android:inputType="textMultiLine"
-        android:textColor="#ffffffff" />
+        android:text="@string/Enter_Description"
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/editEnterAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/editEnterDate"
         android:layout_below="@+id/editEnterDate"
         android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="@string/Enter_Amount"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/editEnterCurr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterAmount"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/editEnterAmount"
         android:layout_below="@+id/editEnterAmount"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/Enter_Currency"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/editEnterDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterDescription"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/editEnterDescription"
         android:layout_below="@+id/editEnterDescription"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="text"
         android:text="@string/Enter_Date"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/editEnterItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
         android:layout_marginTop="70dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/Enter_Expense_Name"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/editEnterCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterItemName"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/editEnterItemName"
         android:layout_below="@+id/editEnterItemName"
         android:layout_marginTop="17dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/Enter_Category"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
     <TextView
         android:id="@+id/textNewExpenseItemHeader"
@@ -86,6 +99,6 @@
         android:layout_marginTop="25dp"
         android:text="@string/New_Expense_Item"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#000" />
 
 </RelativeLayout>

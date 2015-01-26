@@ -10,7 +10,6 @@ public class ExpenseItem {
 	public Amt_Cur Amt_Cur;
 	
 	public ExpenseItem(String ItemName, String Category, String Description, Date Date, Integer Amount, String Currency) {
-		//TODO check status
 		this.ItemName = ItemName;
 		this.Category = Category;
 		this.Description = Description;
@@ -35,29 +34,24 @@ public class ExpenseItem {
 	}
 	
 	public void setItemName(String itemName) {
-		//TODO change in the claim list as well
-		//TODO check status
 		this.ItemName = itemName;
 	}
 	public String getCategory() {
 		return Category;
 	}
 	public void setCategory(String category) {
-		//TODO check status
 		this.Category = category;
 	}
 	public String getDescription() {
 		return Description;
 	}
 	public void setDescription(String description) {
-		//TODO check status
 		this.Description = description;
 	}
 	public Date getDate() {
 		return Date;
 	}
 	public void setDate(Date date) {
-		//TODO check status
 		this.Date = date;
 	}	
 }
