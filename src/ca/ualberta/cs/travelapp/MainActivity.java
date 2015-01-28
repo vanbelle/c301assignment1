@@ -39,6 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ClaimListManager.initManager(this.getApplicationContext());
         
         //for expandable list
         Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
@@ -58,7 +59,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		{
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, AddClaimActivity.class);
+				Intent intent = new Intent(MainActivity.this, AddItemActivity.class); // TODO put back to AddClaimActivity.class
 				startActivity(intent);				
 			}
 		});

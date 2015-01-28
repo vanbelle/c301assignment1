@@ -2,7 +2,6 @@ package ca.ualberta.cs.travelapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ClaimList implements Serializable {
 	
@@ -26,14 +25,14 @@ public class ClaimList implements Serializable {
 		return listeners;
 	}
 	
-	public void addClaim(String ClaimName,  Date StartDate, Date EndDate, String Status, String Description) throws ClaimAlreadyExistsException {
+	public void addClaim(Claim claim) throws ClaimAlreadyExistsException {
 		for (int i = 0; i < claimList.size(); i++) {
-			if( claimList.get(i).getClaimName() == ClaimName) {
+			if( claimList.get(i).getClaimName() == claim.getClaimName()) {
 				throw new ClaimAlreadyExistsException();
 			}
 		}
-		Claim claim = new Claim(ClaimName, StartDate, EndDate, Status,Description);
 		claimList.add(claim);
+		notifyListeners();
 	}
 	
 	public void removeClaim (String claimname){
@@ -42,8 +41,18 @@ public class ClaimList implements Serializable {
 				claimList.remove(i);
 			}
 		}
+		notifyListeners();
 	}
 
+	public boolean contains(String claimname) {
+		for (int i = 0; i < claimList.size(); i++) {
+			if (claimList.get(i).getClaimName() == claimname) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public int size()
 	{
 		return claimList.size();

@@ -17,16 +17,6 @@
         android:inputType="textMultiLine"
         android:text="@string/Enter_Description"
         android:textColor="#000" />
-       
-    <Button
-        android:id="@+id/buttonsaveItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editEnterStatus"
-        android:layout_marginTop="44dp"
-        android:text="@string/save" />
 
     <EditText
         android:id="@+id/editEnterCurr"
@@ -44,6 +34,7 @@
 
     <EditText
         android:id="@+id/editEnterDate"
+        android:focusableInTouchMode="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editEnterDescription"
@@ -70,7 +61,10 @@
         android:ems="10"
         android:inputType="text"
         android:text="@string/Enter_Expense_Name"
-        android:textColor="#000" />
+        android:textColor="#000" >
+    
+    	<requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/editEnterCategory"
@@ -108,9 +102,16 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="@string/Enter_Amount"
-        android:textColor="#000" >
+        android:textColor="#000" />
 
-        <requestFocus />
-    </EditText>
+    <Button
+        android:id="@+id/buttonsaveItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:text="@string/save" />
 
 </RelativeLayout>

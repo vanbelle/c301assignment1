@@ -10,9 +10,7 @@ public class ClaimListController
 {
 
 	private static ClaimList claimlist = null;
-	
-	
-	
+
 	public HashMap<String, ArrayList<Amt_Cur>> getInfo() {
 		HashMap<String, ArrayList<Amt_Cur>> claimlistdetails = new HashMap<String, ArrayList<Amt_Cur>>();
 		return claimlistdetails;
@@ -27,33 +25,33 @@ public class ClaimListController
 					
 					@Override
 					public void update() {
-						saveStudentList();
+						saveClaimList();
 					}
 				});
 				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Could not deserialize StudentList from StudentListManager");
+				throw new RuntimeException("1: Could not deserialize ClaimList from ClaimListManager");
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Could not deserialize StudentList from StudentListManager");
+				throw new RuntimeException("Could not deserialize ClaimList from ClaimListManager");
 			}
 		}
 		return claimlist;
 	}
 	
-	static public void saveStudentList() {
+	static public void saveClaimList() {
 		try {
 			ClaimListManager.getManager().saveClaimList(getClaimList());
 		} catch (IOException e) {
 			//TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException("Could not deserialize StudentList from StudentListManager");
+			throw new RuntimeException("2: Could not deserialize ClaimList from ClaimListManager");
 		}
 	}
 
-	public void addClaim(String ClaimName, String Description, Date StartDate, Date EndDate, String Status) throws ClaimAlreadyExistsException {
-		getClaimList().addClaim(ClaimName, StartDate, EndDate, Status, Description);
+	public void addClaim(Claim claim) throws ClaimAlreadyExistsException {
+		getClaimList().addClaim(claim);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -62,10 +63,10 @@ import android.util.Base64;
 			return Base64.encodeToString(bytes,Base64.DEFAULT);
 		}
 		
-		public void saveClaimList(ClaimList sl) throws IOException {
+		public void saveClaimList(ClaimList cl) throws IOException {
 			SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
 			Editor editor = settings.edit();
-			editor.putString(clKey, claimListToString(sl));
+			editor.putString(clKey, claimListToString(cl));
 			editor.commit();	
 		}
 

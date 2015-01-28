@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 public class AddClaimActivity extends Activity
 {
-
     private EditText startDate;
     private EditText endDate;
     
@@ -35,6 +34,7 @@ public class AddClaimActivity extends Activity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_claim);
+		ClaimListManager.initManager(this.getApplicationContext());
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
@@ -120,18 +120,16 @@ public class AddClaimActivity extends Activity
 	
 	
 	public void addClaimAction(View v) throws ParseException, ClaimAlreadyExistsException {
-		Toast.makeText(this, "Y",Toast.LENGTH_SHORT).show();	
-		
 		EditText claimname = (EditText) findViewById(R.id.EnterClaimName);
 		EditText status = (EditText) findViewById(R.id.editEnterStatus);
 		EditText description = (EditText) findViewById(R.id.EnterDescription);
-		
-		
+
 		Date start = df.parse(startDate.getText().toString());
 		Date end = df.parse(endDate.getText().toString());	
 		
 		ClaimListController ct = new ClaimListController();
-		ct.addClaim(claimname.getText().toString(), description.getText().toString(), start, end, status.getText().toString());
+		Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
+		ct.addClaim(claim);
 		
 		Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
 		
