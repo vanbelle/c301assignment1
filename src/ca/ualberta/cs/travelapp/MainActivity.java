@@ -42,10 +42,15 @@ public class MainActivity extends Activity implements View.OnClickListener{
         
         //for expandable list
         Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
-//      claimlist = ClaimList.getInfo();
-//      claims = new ArrayList<String>(claimlist.keySet());
-//      adapter = new ClaimAdapter(this, claimlist, claims);
-//      Exp_List.setAdapter(adapter);
+        try {
+        	ClaimListController cl = new ClaimListController();
+        	claimlist = cl.getInfo();
+        	claims = new ArrayList<String>(claimlist.keySet());
+        	adapter = new ClaimAdapter(this, claimlist, claims);
+            Exp_List.setAdapter(adapter);
+        } catch (NullPointerException e){
+        	
+        }
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);

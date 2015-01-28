@@ -10,8 +10,8 @@
     <string name="New_Claim">New Claim</string>
     <string name="Enter_Claim_Name">Enter Claim Name</string>
     <string name="Enter_Status">Enter Status</string>
-    <string name="Enter_End_Date">Enter End Date (YYYY/MM/DD)</string>
-    <string name="Enter_Start_Date">Enter Start Date (YYYY/MM/DD)</string>
+    <string name="Enter_End_Date">End Date</string>
+    <string name="Enter_Start_Date">Start Date</string>
     <string name="Enter_Description">Enter Description</string>
     <string name="Description">Description</string>
     <string name="Add_Claim">Add Claim</string>
@@ -35,5 +35,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="email">E-mail</string>
+    <string name="save">Save</string>
 
 </resources>

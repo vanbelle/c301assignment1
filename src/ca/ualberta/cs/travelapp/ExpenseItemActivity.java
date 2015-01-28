@@ -17,22 +17,22 @@ public class ExpenseItemActivity extends Activity {
 		int itemindex = getIntent().getIntExtra("itemposition", 0);
 		
 		TextView displayName = (TextView) findViewById(R.id.textItemName);
-		displayName.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getItemName());
+//		displayName.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getItemName());
 		
 		TextView displaydescription= (TextView) findViewById(R.id.textItemDescription);
-		displaydescription.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getDescription());	
+//		displaydescription.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getDescription());	
 		
 		TextView displayDate = (TextView) findViewById(R.id.textDate);
-		displayDate.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getDate().toString());
+//		displayDate.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getDate().toString());
 		
 		TextView displayCat = (TextView) findViewById(R.id.textCategory);
-		displayCat.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getCategory());
+//		displayCat.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getCategory());
 		
 		TextView displayAmt = (TextView) findViewById(R.id.textItemAmount);
-		displayAmt.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getAmt_Cur().getAmount());
+//		displayAmt.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getAmt_Cur().getAmount());
 		
 		TextView displayCur = (TextView) findViewById(R.id.textItemCurrency);
-		displayCur.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getAmt_Cur().getCurrency());
+//		displayCur.setText(ClaimList.getClaims().get(claimindex).getEItems().get(itemindex).getAmt_Cur().getCurrency());
 	}
 
 	@Override

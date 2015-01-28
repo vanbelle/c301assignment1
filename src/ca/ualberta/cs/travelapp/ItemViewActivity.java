@@ -26,13 +26,13 @@ public class ItemViewActivity extends Activity {
 		index = getIntent().getIntExtra("position", 0);
 		
 		TextView displayName = (TextView) findViewById(R.id.textClaimName);
-		displayName.setText(ClaimList.getClaims().get(index).getClaimName()+" ("+ClaimList.getClaims().get(index).getStatus()+")");
+//		displayName.setText(ClaimList.getClaims().get(index).getClaimName()+" ("+ClaimList.getClaims().get(index).getStatus()+")");
 		
 		TextView displaydescription= (TextView) findViewById(R.id.textItemDescription);
-		displaydescription.setText(ClaimList.getClaims().get(index).getDescription());
+//		displaydescription.setText(ClaimList.getClaims().get(index).getDescription());
 		
 		TextView displayDate = (TextView) findViewById(R.id.textDate);
-		displayDate.setText(ClaimList.getClaims().get(index).getStartDate()+" - "+ClaimList.getClaims().get(index).getEndDate());
+//		displayDate.setText(ClaimList.getClaims().get(index).getStartDate()+" - "+ClaimList.getClaims().get(index).getEndDate());
 		
 		//add new expense item button
         Button itembutton = (Button) findViewById(R.id.AddExpenseItemButton);
@@ -47,9 +47,9 @@ public class ItemViewActivity extends Activity {
 		
 		//Expense Item List
 		ListView listview = (ListView) findViewById(R.id.listExpenseItems);
-		ArrayList<ExpenseItem> list = ClaimList.getClaims().get(index).getEItems();
-		ArrayAdapter<ExpenseItem> itemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, list);
-		listview.setAdapter(itemAdapter);
+//		ArrayList<ExpenseItem> list = ClaimList.getClaims().get(index).getEItems();
+//		ArrayAdapter<ExpenseItem> itemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, list);
+//		listview.setAdapter(itemAdapter);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
