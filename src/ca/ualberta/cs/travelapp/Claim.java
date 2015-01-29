@@ -1,9 +1,11 @@
 package ca.ualberta.cs.travelapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Claim {
+public class Claim implements Serializable{
+	private static final long serialVersionUID = 5792713063252972173L;
 	public String ClaimName;
 	public String Status;
 	public String Description;
@@ -19,6 +21,30 @@ public class Claim {
 		this.EndDate = EndDate;
 		this.Description = Description;
 		this.Status = Status;	
+	} 
+	
+	public boolean equals(Object compareClaim) {
+		if (compareClaim != null &&
+				compareClaim.getClass()==this.getClass()) {
+			return this.equals((Claim)compareClaim);
+		} else {
+			return false;
+		} 
+	} 
+	
+	public String toString() {
+		return getClaimName();
+	}
+	
+	public boolean equals(Claim compareClaim) {
+		if(compareClaim==null) {	
+			return false;
+		}
+		return getClaimName().equals(compareClaim.getClaimName());
+	}
+	
+	public int hashCode() {
+		return ("Claim:"+getClaimName()).hashCode();
 	}
 	
 	public void addItem(String ItemName, String Category, String Description, Date Date, Integer Amount, String Currency) throws WrongStatusException {

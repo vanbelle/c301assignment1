@@ -11,7 +11,6 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
@@ -63,8 +62,6 @@ public class AddClaimActivity extends Activity
 					System.out.println("That Claim Name has already been used");
 					e.printStackTrace();
 				}
-				Intent intent = new Intent(AddClaimActivity.this, MainActivity.class);
-				startActivity(intent);
 			}
 		});
     }
@@ -130,6 +127,8 @@ public class AddClaimActivity extends Activity
 		ClaimListController ct = new ClaimListController();
 		Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
 		ct.addClaim(claim);
+		ct.sort();
+		ClaimListController.saveClaimList();
 		
 		Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
 		

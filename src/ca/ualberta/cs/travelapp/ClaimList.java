@@ -2,6 +2,8 @@ package ca.ualberta.cs.travelapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ClaimList implements Serializable {
 	
@@ -70,6 +72,15 @@ public class ClaimList implements Serializable {
 	
 	public void removeListener(Listener l) {
 	 	getListeners().remove(l);
+	}
+
+	public void sort() {
+		Collections.sort(claimList, new Comparator<Claim>() {
+			@Override
+			public int compare(Claim lhs, Claim rhs){
+				return lhs.getStartDate().compareTo(rhs.getStartDate());
+			}
+		});
 	}
 	
 }

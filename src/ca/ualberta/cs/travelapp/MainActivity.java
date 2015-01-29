@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -43,15 +44,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
         
         //for expandable list
         Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
-        try {
-        	ClaimListController cl = new ClaimListController();
-        	claimlist = cl.getInfo();
-        	claims = new ArrayList<String>(claimlist.keySet());
-        	adapter = new ClaimAdapter(this, claimlist, claims);
-            Exp_List.setAdapter(adapter);
-        } catch (NullPointerException e){
-        	
-        }
+        prepareListData();//the get info stuff
+        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, claims, claimlist);
+        Exp_List.setAdapter(listAdapter);
+        
+        
+//        try {
+//        	ClaimListController cl = new ClaimListController();
+//        	claimlist = cl.getInfo();
+//        	claims = new ArrayList<String>(claimlist.keySet());
+//        	adapter = new ClaimAdapter(this, claimlist, claims);
+//            Exp_List.setAdapter(adapter);
+//        } catch (NullPointerException e){
+//        	
+//        }
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
@@ -59,7 +65,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		{
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, AddItemActivity.class); // TODO put back to AddClaimActivity.class
+				Intent intent = new Intent(MainActivity.this, AddClaimActivity.class);
 				startActivity(intent);				
 			}
 		});
