@@ -24,4 +24,8 @@ public class Amt_Cur
 	public void setCurrency(String currency){
 		this.Currency = currency;
 	}
+	
+	public String toString() {
+		return Amount.toString()+"   "+this.Currency;
+	}
 }

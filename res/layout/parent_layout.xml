@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
     
     <TextView 
      	android:id="@+id/parent_txt"
-     	android:layout_width="fill_parent"
+     	android:layout_width="230dp"
      	android:layout_height="wrap_content"
      	android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
      	android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
@@ -16,6 +16,14 @@
      	android:paddingTop="10dp"
      	android:paddingBottom="10dp"        
     	/>
-    
+
+    <Button
+        android:id="@+id/seemorebutton"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="@string/more"
+        android:textSize="12sp" />
 
 </LinearLayout>

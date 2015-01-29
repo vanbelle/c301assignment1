@@ -19,6 +19,7 @@ package ca.ualberta.cs.travelapp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,14 +28,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+
 public class MainActivity extends Activity implements View.OnClickListener{
-	HashMap<String, ArrayList<Amt_Cur>> claimlist;
-	ArrayList<String> claims;
+	HashMap<String, ArrayList<String>> claimlist;
+	List<String> claims;
 	ExpandableListView Exp_List;
-	ClaimAdapter adapter;
+	ClaimAdapter listAdapter;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +46,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //for expandable list
         Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
         prepareListData();//the get info stuff
-        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, claims, claimlist);
+        listAdapter = new ClaimAdapter(this, claims, claimlist);
         Exp_List.setAdapter(listAdapter);
         
-        
-//        try {
-//        	ClaimListController cl = new ClaimListController();
-//        	claimlist = cl.getInfo();
-//        	claims = new ArrayList<String>(claimlist.keySet());
-//        	adapter = new ClaimAdapter(this, claimlist, claims);
-//            Exp_List.setAdapter(adapter);
-//        } catch (NullPointerException e){
-//        	
-//        }
+        //add a listener
+//        ClaimListController.getClaimList().addListener(new Listener()
+//		{		
+//			@Override
+//			public void update()
+//			{
+//				claimlist.clear();
+//				//claims.clear();
+//				prepareListData();
+//				listAdapter.notifyDataSetChanged();			
+//			}
+//		});
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
@@ -69,9 +72,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				startActivity(intent);				
 			}
 		});
+		
+		
     }
-				
-
+    
+    private void prepareListData() {
+        claims = new ArrayList<String>();
+        claimlist = new HashMap<String, ArrayList<String>>();
+        ClaimListController.getClaimList();
+    
+         //Adding parent data
+        for (int i = 0; i < ClaimListController.getClaimList().size(); i++){
+        	String string = ClaimListController.getClaimList().getClaims().get(i).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(i).getStatus();
+        	claims.add(string);
+        	// Adding child data
+        	ArrayList<String> children = new ArrayList<String>();
+        	for (int j = 0; i < ClaimListController.getClaimList().getClaims().get(i).getTotalSum().size(); j++){
+        		children.add(ClaimListController.getClaimList().getClaims().get(i).getTotalSum().get(j).toString());
+        	}
+        	claimlist.put(claims.get(i), children); // Header, Child data
+        }
+     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -2,25 +2,28 @@ package ca.ualberta.cs.travelapp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ClaimAdapter extends BaseExpandableListAdapter{
 	
 	private Context ctx;
-	private HashMap<String, ArrayList<Amt_Cur>> Claim_list;
-	private ArrayList<String> Claims_List;
+	private HashMap<String, ArrayList<String>> Claim_list;
+	private List<String> Claims_List;
 	
-	public ClaimAdapter(Context ctx, HashMap<String, ArrayList<Amt_Cur>> Claim_list, ArrayList<String> Claims_List ) {
+	public ClaimAdapter(Context ctx, List<String> claims, HashMap<String, ArrayList<String>> claimlist ) {
 		this.ctx = ctx;
-		this.Claim_list = Claim_list;
-		this.Claims_List = Claims_List;
+		this.Claim_list = claimlist;
+		this.Claims_List = claims;
 	}
 
 	@Override
@@ -55,17 +58,26 @@ public class ClaimAdapter extends BaseExpandableListAdapter{
 
 	@Override
 	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public View getGroupView(int parent, boolean isExpanded, View convertView, ViewGroup parentView) {
+	public View getGroupView(final int parent, boolean isExpanded, View convertView, ViewGroup parentView) {
 		String group_title = (String) getGroup(parent);
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.parent_layout, parentView, false);
 		}
+        Button morebutton = (Button) convertView.findViewById(R.id.seemorebutton);
+		morebutton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ctx, ItemViewActivity.class);
+				intent.putExtra("position", parent);
+				ctx.startActivity(intent);
+			}
+		});
 		TextView parent_textview = (TextView) convertView.findViewById(R.id.parent_txt);
 		parent_textview.setTypeface(null, Typeface.BOLD);
 		parent_textview.setText(group_title);
