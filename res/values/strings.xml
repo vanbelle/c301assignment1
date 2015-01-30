@@ -8,6 +8,8 @@
     <string name="title_activity_add_item">AddItemActivity</string>
     <string name="title_activity_item_view">ItemViewActivity</string>
     <string name="New_Claim">New Claim</string>
+    <string name="Edit_Item">Edit Item</string>
+    <string name="Edit_Claim">Edit Claim</string>
     <string name="Enter_Claim_Name">Enter Claim Name</string>
     <string name="Enter_Status">Enter Status</string>
     <string name="Enter_End_Date">End Date</string>
@@ -37,5 +39,7 @@
     <string name="email">E-mail</string>
     <string name="save">Save</string>
     <string name="more">See More</string>
+    <string name="title_activity_edit_claim">EditClaimActivity</string>
+    <string name="title_activity_edit_item">EditItemActivity</string>
 
 </resources>

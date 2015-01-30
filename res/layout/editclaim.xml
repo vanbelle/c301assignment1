@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/capture" >
+
+    <EditText
+        android:id="@+id/EntersetClaimDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EntersetClaimName"
+        android:layout_below="@+id/EntersetClaimName"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/EntersetClaimStartDate"
+        android:layout_width="0dp"
+        android:focusableInTouchMode="false"
+        android:layout_weight=".5"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EntersetClaimName"
+        android:layout_below="@+id/EntersetClaimDescription"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/EntersetClaimEndDate"
+        android:layout_width="0dp"
+        android:layout_weight=".5"
+        android:focusableInTouchMode="false"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/EntersetClaimStartDate"
+        android:layout_below="@+id/EntersetClaimStartDate"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/editsetClaimStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/EnterEndDate"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/buttonsaveClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editEntersetClaimStatus"
+        android:layout_marginTop="44dp"
+        android:text="@string/save" />
+
+    <TextView
+        android:id="@+id/texteditClaimHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="@string/Edit_Claim"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/EntersetClaimName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/texteditClaimHeader"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="#000" >
+
+        <requestFocus />
+    </EditText>
+    
+
+</RelativeLayout>

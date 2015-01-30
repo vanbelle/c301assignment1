@@ -1,6 +1,8 @@
 package ca.ualberta.cs.travelapp;
 
-import java.text.DateFormat;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +11,6 @@ import java.util.Locale;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
@@ -24,8 +25,8 @@ public class AddItemActivity extends Activity {
     private EditText Date;
     private DatePickerDialog DatePickerDialog;
     private SimpleDateFormat df;
-	private int i;
-	//TODO get i
+	private int index;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,6 +34,9 @@ public class AddItemActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_expense_item);
 		ClaimListManager.initManager(this.getApplicationContext());
+		EIManager.initManager(this.getApplicationContext());
+		
+		index = getIntent().getIntExtra("position", 0);
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
@@ -52,9 +56,11 @@ public class AddItemActivity extends Activity {
 				} catch (ParseException e)
 				{
 					e.printStackTrace();
+				} catch (WrongStatusException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}  
-				Intent intent = new Intent(AddItemActivity.this, ExpenseItemActivity.class);
-				startActivity(intent);
 			}
 		});
     }
@@ -90,19 +96,37 @@ public class AddItemActivity extends Activity {
 		return true;
 	}
 	
-	public void addItemAction(View v) throws ParseException {
+	public void addItemAction(View v) throws ParseException, WrongStatusException {
 		EditText itemname = (EditText) findViewById(R.id.editEnterItemName);
 		EditText category = (EditText) findViewById(R.id.editEnterCategory);
 		EditText description = (EditText) findViewById(R.id.editEnterDescription);
 		EditText currency = (EditText) findViewById(R.id.editEnterCurr);
 		EditText amount = (EditText) findViewById(R.id.editEnterAmount);
 		
-		int amt = Integer.parseInt(amount.getText().toString());
-		Date date = df.parse(Date.getText().toString());
+		// Create a DecimalFormat that fits your requirements
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setGroupingSeparator(',');
+		symbols.setDecimalSeparator('.');
+		String pattern = "#,###.##";
+		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+		decimalFormat.setParseBigDecimal(true);
 		
-		ExpenseItem item= new ExpenseItem(itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
-		//TODO save in correct claim
+		BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
+		Date date = df.parse(Date.getText().toString());
+		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
+		ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
+		
+		ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
+		ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
+		EIController.getItemList().addItem(item);
 		Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
+		
+		itemname.setText("Enter Another Item");
+		category.setText("Enter Category");
+		description.setText("Enter Description");
+		Date.setText("Enter Date");
+		amount.setText("Enter Amount");
+		currency.setText("Enter Currency");
 	}
 
 }

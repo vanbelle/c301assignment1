@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity {
 	HashMap<String, ArrayList<String>> claimlist;
 	List<String> claims;
 	ExpandableListView Exp_List;
@@ -42,25 +42,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ClaimListManager.initManager(this.getApplicationContext());
-        
-        //for expandable list
-        Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
-        prepareListData();//the get info stuff
-        listAdapter = new ClaimAdapter(this, claims, claimlist);
-        Exp_List.setAdapter(listAdapter);
-        
-        //add a listener
-//        ClaimListController.getClaimList().addListener(new Listener()
-//		{		
-//			@Override
-//			public void update()
-//			{
-//				claimlist.clear();
-//				//claims.clear();
-//				prepareListData();
-//				listAdapter.notifyDataSetChanged();			
-//			}
-//		});
+        EIManager.initManager(this.getApplicationContext());
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
@@ -74,6 +56,28 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		});
 		
 		
+    }
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	
+    	//for the expandable list
+        Exp_List = (ExpandableListView) findViewById(R.id.listofClaimItems);
+        prepareListData();//the get info stuff
+        listAdapter = new ClaimAdapter(this, claims, claimlist);
+        Exp_List.setAdapter(listAdapter);
+        //add a listener
+        ClaimListController.getClaimList().addListener(new Listener()
+		{		
+			@Override
+			public void update()
+			{
+				claimlist.clear();
+				claims.clear();		
+				prepareListData();
+				
+			}
+		});
     }
     
     private void prepareListData() {
@@ -112,14 +116,4 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-	@Override
-	public void onClick(View v)
-	{
-
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -5,26 +5,17 @@
     android:background="@drawable/capture">
 
     <TextView
-        android:id="@+id/textDate"
+        android:id="@+id/textItemAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/Date"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000" />
-
-    <TextView
-        android:id="@+id/textItemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textDate"
-        android:layout_marginTop="16dp"
-        android:text="@string/Expense_Item"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/textItemDescription"
+        android:gravity="center"
+        android:layout_marginTop="27dp"
+        android:text="@string/Amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000" />
 
     <TextView
@@ -32,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textItemName"
-        android:layout_marginTop="27dp"
         android:text="@string/Category"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000" />
@@ -44,34 +36,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textCategory"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:text="@string/Description"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/Date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:layout_below="@+id/textDate"
+        android:layout_marginTop="17dp"
+        android:text="@string/Expense_Item"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000" />
 
     <TextView
         android:id="@+id/textItemCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textItemAmount"
         android:text="@string/Currency"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000" />
 
-    <TextView
-        android:id="@+id/textItemAmount"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonitemedit"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textItemCurrency"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp"
-        android:text="@string/Amount"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000" />
+        android:layout_alignParentTop="true"
+        android:text="@string/edit" />
+
+    <Button
+        android:id="@+id/buttonitemdelete"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/delete" />
 
 </RelativeLayout>

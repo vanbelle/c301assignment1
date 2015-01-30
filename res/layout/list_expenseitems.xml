@@ -22,57 +22,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="65dp"
+        android:gravity="center"
         android:text="@string/CN_Status"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000" />
 
     <Button
         android:id="@+id/buttonemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textClaimDescription"
-        android:layout_alignEnd="@+id/textClaimDescription"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:text="@string/email" />
 
     <Button
         android:id="@+id/buttondelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonemail"
-        android:layout_alignBottom="@+id/buttonemail"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/delete" />
 
     <Button
         android:id="@+id/buttonedit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttondelete"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="21dp"
-        android:layout_marginEnd="21dp"
         android:text="@string/edit" />
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-        </LinearLayout>
-    </LinearLayout>
+    
 
     <ListView
         android:id="@+id/listExpenseItems"
@@ -103,9 +84,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textStarttoEndDate"
         android:layout_marginTop="15dp"
+        android:gravity="center"
         android:text="@string/Description"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000" />
@@ -115,8 +98,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textClaimName"
+        android:gravity="center"
         android:text="@string/Date_Date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#000" />
