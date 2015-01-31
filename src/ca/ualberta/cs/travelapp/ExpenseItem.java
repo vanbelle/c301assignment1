@@ -26,6 +26,15 @@ public class ExpenseItem implements Serializable{
 	}
 	
 	public String toString() {
+		return ItemName;
+
+	}
+	
+	public void setClaimName(String Name) {
+		this.ClaimName = Name;
+	}
+	
+	public String toEmailString() {
 		String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(Date);
 		return ItemName+"\n"+Category+"\n"+Description+"\n"+date+"\n"+Amt_Cur.toString()+"\n\n";
 

@@ -133,6 +133,13 @@ public class AddClaimActivity extends Activity
 		
 		Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
 		
+		
+		claimname.setText("");
+		status.setText("");
+		description.setText("");
+		startDate.setText("");
+		endDate.setText("");
+		
 		claimname.setHint("Enter Another Claim");
 		status.setHint("Enter Status");
 		description.setHint("Enter Description");

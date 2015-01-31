@@ -100,7 +100,7 @@
         android:layout_below="@+id/editEnterDate"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned|numberDecimal"
         android:hint="@string/Enter_Amount"
         android:textColorHint="#000" />
 

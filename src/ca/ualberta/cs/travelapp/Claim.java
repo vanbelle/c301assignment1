@@ -38,7 +38,7 @@ public class Claim implements Serializable{
 	public String toString() {
 		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getStartDate());
 		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getEndDate());
-		return ClaimName+"\n"+"---------------\n"+Status+"\n"+Description+"\n"+startdate+" - "+endDate+"\n";
+		return ClaimName+"\n"+"---------------\n"+Status+"\n"+Description+"\n"+startdate+" - "+endDate+"\n\n";
 	}
 	
 	public boolean equals(Claim compareClaim) {

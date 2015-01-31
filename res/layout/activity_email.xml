@@ -1,23 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:text="Complete the fields to send an email"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:orientation="vertical" >
 
     <EditText
         android:id="@+id/recipient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Recipient"
+        android:hint="@string/Recipient"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -25,20 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Subject" />
+        android:hint="@string/Subject" />
 
     <EditText
         android:id="@+id/body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="0.53"
         android:ems="10"
-        android:hint="Message body" />
+        android:hint="@string/Message" />
 
     <Button
         android:id="@+id/sendEmail"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Compose an email" />
+        android:text="@string/Send" />
 
 </LinearLayout>

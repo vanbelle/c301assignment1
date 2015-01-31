@@ -39,7 +39,7 @@ public class EmailActivity extends Activity
 		for (int i = 0; i < EIController.getItemList().getItems().size(); i++){
 			if (EIController.getItemList().getItems().get(i).getClaimName() == ClaimListController.getClaimList().getClaims().get(index).getClaimName())
 			{
-				item +=EIController.getItemList().getItems().get(index).toString();
+				item +=EIController.getItemList().getItems().get(index).toEmailString();
 		
 			}
 		}

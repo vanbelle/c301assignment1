@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItemViewActivity extends Activity {
 	int index;
@@ -53,9 +54,14 @@ public class ItemViewActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ItemViewActivity.this, AddItemActivity.class);
-				intent.putExtra("position", index);
-				startActivity(intent);
+				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
+				if (status == "In Progress" || status == "Returned") {
+					Intent intent = new Intent(ItemViewActivity.this, AddItemActivity.class);
+					intent.putExtra("claimposition", index);
+					startActivity(intent);
+				} else {
+					notAllowed(v);
+				}
 			}
 		});
 		
@@ -66,7 +72,7 @@ public class ItemViewActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ItemViewActivity.this, EditClaimActivity.class);
-				intent.putExtra("position", index);
+				intent.putExtra("claimposition", index);
 				startActivity(intent);
 			}
 		});
@@ -78,7 +84,7 @@ public class ItemViewActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ItemViewActivity.this, EmailActivity.class);
-				intent.putExtra("position", index);
+				intent.putExtra("claimposition", index);
 				startActivity(intent);
 			}
 		});	
@@ -138,6 +144,10 @@ public class ItemViewActivity extends Activity {
 			}
 		});
 	
+	}
+	
+	public void notAllowed(View v) {
+		Toast.makeText(this, "Status does not allow for adding claims", Toast.LENGTH_LONG).show();
 	}
 	
 	public void onResume() {

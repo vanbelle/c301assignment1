@@ -114,14 +114,22 @@ public class AddItemActivity extends Activity {
 		BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
 		Date date = df.parse(Date.getText().toString());
 		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
+		
 		ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
 		
 		ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
 		ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
 		EIController.getItemList().addItem(item);
-		Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
 		
+		Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
 
+		itemname.setText("");
+		category.setText("");
+		description.setText("");
+		Date.setText("");
+		amount.setText("");
+		currency.setText("");
+		
 		itemname.setHint("Enter Another Item");
 		category.setHint("Enter Category");
 		description.setHint("Enter Description");
