@@ -65,6 +65,10 @@
             android:name="ca.ualberta.cs.travelapp.EditItemActivity"
             android:label="@string/title_activity_edit_item" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.travelapp.EmailActivity"
+            android:label="@string/title_activity_email" >
+        </activity>
     </application>
 
 </manifest>

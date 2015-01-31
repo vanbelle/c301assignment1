@@ -45,8 +45,8 @@ public class AddClaimActivity extends Activity
         endDate = (EditText) findViewById(R.id.EnterEndDate);
         endDate.setInputType(InputType.TYPE_NULL);
         
-	    setDateTimeField();
-	    		
+	    setDateTimeField();    
+	    
         Button savebutton = (Button) findViewById(R.id.buttonsaveClaim);
 		savebutton.setOnClickListener(new View.OnClickListener()
 		{
@@ -133,11 +133,11 @@ public class AddClaimActivity extends Activity
 		
 		Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
 		
-		claimname.setText("Enter Another Claim");
-		status.setText("Enter Status");
-		description.setText("Enter Description");
-		startDate.setText("Enter Start Date");
-		endDate.setText("Enter End Date");
+		claimname.setHint("Enter Another Claim");
+		status.setHint("Enter Status");
+		description.setHint("Enter Description");
+		startDate.setHint("Enter Start Date");
+		endDate.setHint("Enter End Date");
 	}
 
 }

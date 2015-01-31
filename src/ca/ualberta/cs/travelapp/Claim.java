@@ -3,8 +3,10 @@ package ca.ualberta.cs.travelapp;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Claim implements Serializable{
 	private static final long serialVersionUID = 5792713063252972173L;
@@ -32,9 +34,13 @@ public class Claim implements Serializable{
 			return false;
 		}
 	}
+
 	public String toString() {
-		return getClaimName();
+		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getStartDate());
+		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getEndDate());
+		return ClaimName+"\n"+"---------------\n"+Status+"\n"+Description+"\n"+startdate+" - "+endDate+"\n";
 	}
+	
 	public boolean equals(Claim compareClaim) {
 		if(compareClaim==null) {
 			return false;

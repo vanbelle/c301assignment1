@@ -47,27 +47,6 @@
         android:inputType="date"
         android:textColor="#000" />
 
-    <EditText
-        android:id="@+id/editsetClaimStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/EnterEndDate"
-        android:layout_marginTop="21dp"
-        android:ems="10"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/buttonsaveClaim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editEntersetClaimStatus"
-        android:layout_marginTop="44dp"
-        android:text="@string/save" />
-
     <TextView
         android:id="@+id/texteditClaimHeader"
         android:layout_width="wrap_content"
@@ -94,6 +73,26 @@
 
         <requestFocus />
     </EditText>
-    
+
+    <Button
+        android:id="@+id/buttonsaveClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="44dp"
+        android:text="@string/save" />
+
+    <EditText
+        android:id="@+id/editsetClaimStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/EntersetClaimEndDate"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:inputType="text" />
 
 </RelativeLayout>

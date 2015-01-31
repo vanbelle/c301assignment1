@@ -41,5 +41,6 @@
     <string name="more">See More</string>
     <string name="title_activity_edit_claim">EditClaimActivity</string>
     <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="title_activity_email">EmailActivity</string>
 
 </resources>

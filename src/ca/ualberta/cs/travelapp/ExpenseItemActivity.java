@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ExpenseItemActivity extends Activity {
-	public int caimindex;
+	public int claimindex;
 	public int itemindex;
 
 	@Override

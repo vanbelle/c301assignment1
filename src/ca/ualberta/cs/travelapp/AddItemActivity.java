@@ -121,12 +121,13 @@ public class AddItemActivity extends Activity {
 		EIController.getItemList().addItem(item);
 		Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
 		
-		itemname.setText("Enter Another Item");
-		category.setText("Enter Category");
-		description.setText("Enter Description");
-		Date.setText("Enter Date");
-		amount.setText("Enter Amount");
-		currency.setText("Enter Currency");
+
+		itemname.setHint("Enter Another Item");
+		category.setHint("Enter Category");
+		description.setHint("Enter Description");
+		Date.setHint("Enter Date");
+		amount.setHint("Enter Amount");
+		currency.setHint("Enter Currency");
 	}
 
 }

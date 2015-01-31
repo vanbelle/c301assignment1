@@ -51,6 +51,6 @@ public class Amt_Cur implements Serializable
 	}
 	
 	public String toString() {
-		return Amount.toString()+"   "+this.Currency;
+		return Amount.toString()+"  "+this.Currency;
 	}
 }

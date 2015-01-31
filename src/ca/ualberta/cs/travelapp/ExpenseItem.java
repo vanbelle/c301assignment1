@@ -2,7 +2,9 @@ package ca.ualberta.cs.travelapp;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ExpenseItem implements Serializable{
 	
@@ -24,7 +26,9 @@ public class ExpenseItem implements Serializable{
 	}
 	
 	public String toString() {
-		return getItemName();
+		String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(Date);
+		return ItemName+"\n"+Category+"\n"+Description+"\n"+date+"\n"+Amt_Cur.toString()+"\n\n";
+
 	}
 	
 	public String getClaimName(){

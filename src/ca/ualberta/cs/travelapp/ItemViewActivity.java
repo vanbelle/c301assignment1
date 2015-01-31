@@ -54,9 +54,34 @@ public class ItemViewActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ItemViewActivity.this, AddItemActivity.class);
+				intent.putExtra("position", index);
 				startActivity(intent);
 			}
 		});
+		
+		//edit button
+        Button editbutton = (Button) findViewById(R.id.buttonedit);
+		editbutton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ItemViewActivity.this, EditClaimActivity.class);
+				intent.putExtra("position", index);
+				startActivity(intent);
+			}
+		});
+		
+		//email button
+        Button emailbutton = (Button) findViewById(R.id.buttonemail);
+		emailbutton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ItemViewActivity.this, EmailActivity.class);
+				intent.putExtra("position", index);
+				startActivity(intent);
+			}
+		});	
 		
 		//Expense Item List
 		ListView listview = (ListView) findViewById(R.id.listExpenseItems);
@@ -83,7 +108,6 @@ public class ItemViewActivity extends Activity {
 		totalview.setAdapter(totalAdapter);
 		
 		//Delete Button
-
 		Button deletebutton = (Button) findViewById(R.id.buttondelete);
 		deletebutton.setOnClickListener(new View.OnClickListener() {
 
