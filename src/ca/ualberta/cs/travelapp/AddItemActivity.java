@@ -117,7 +117,6 @@ public class AddItemActivity extends Activity {
 
 			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
 			Toast.makeText(this,ClaimListController.getClaimList().getClaims().get(index).getEItems().get(0).getAmt_Cur().toString(), Toast.LENGTH_LONG).show();
-			ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
 			EIController.getItemList().addItem(item);
 
 			Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();

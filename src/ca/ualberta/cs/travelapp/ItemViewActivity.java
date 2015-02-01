@@ -88,12 +88,6 @@ public class ItemViewActivity extends Activity {
 			}
 		});
 
-		//Total List
-		ListView totalview = (ListView) findViewById(R.id.listTotalSum);
-		ArrayList<Amt_Cur> total = ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
-		ArrayAdapter<Amt_Cur> totalAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, total);
-		totalview.setAdapter(totalAdapter);
-
 		//Delete Button
 		Button deletebutton = (Button) findViewById(R.id.buttondelete);
 		deletebutton.setOnClickListener(new View.OnClickListener() {
