@@ -29,12 +29,12 @@ public class ItemViewActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_expenseitems);
+		TSManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
 		
 		index = getIntent().getIntExtra("position", 0);
 		String string = ClaimListController.getClaimList().getClaims().get(index).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(index).getStatus();
-		
 		TextView displayName = (TextView) findViewById(R.id.textClaimName);
 		displayName.setText(string);
 		
@@ -47,7 +47,6 @@ public class ItemViewActivity extends Activity {
 		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getEndDate());
 		displayDate.setText(startdate+" - "+endDate);
 		
-		
 		//add new expense item button
         Button itembutton = (Button) findViewById(R.id.AddExpenseItemButton);
 		itembutton.setOnClickListener(new View.OnClickListener() {
@@ -55,12 +54,12 @@ public class ItemViewActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
-				if (status == "In Progress" || status == "Returned") {
+				if (status.equals("In Progress") || status.equals("Returned")) {
 					Intent intent = new Intent(ItemViewActivity.this, AddItemActivity.class);
 					intent.putExtra("claimposition", index);
 					startActivity(intent);
 				} else {
-					notAllowed(v);
+					notAllowed();
 				}
 			}
 		});
@@ -87,24 +86,6 @@ public class ItemViewActivity extends Activity {
 				intent.putExtra("claimposition", index);
 				startActivity(intent);
 			}
-		});	
-		
-		//Expense Item List
-		ListView listview = (ListView) findViewById(R.id.listExpenseItems);
-		ArrayList<ExpenseItem> list = ClaimListController.getClaimList().getClaims().get(index).getEItems();
-		ArrayAdapter<ExpenseItem> itemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, list);
-		listview.setAdapter(itemAdapter);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Intent intent = new Intent(ItemViewActivity.this, ExpenseItemActivity.class);
-				intent.putExtra("claimposition", index);
-				intent.putExtra("itemposition", position);
-				startActivity(intent);
-				
-			}
 		});
 	
 		//Total List
@@ -128,7 +109,7 @@ public class ItemViewActivity extends Activity {
 						String name = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 						ClaimListController.getClaimList().removeClaim(name);
 						for (int i = 0; i < EIController.getItemList().size(); i++) {
-							if (EIController.getItemList().getItems().get(i).getClaimName() == name) {
+							if (EIController.getItemList().getItems().get(i).getClaimName().equals(name)) {
 								EIController.getItemList().getItems().remove(i);
 							}
 						}
@@ -146,25 +127,33 @@ public class ItemViewActivity extends Activity {
 	
 	}
 	
-	public void notAllowed(View v) {
-		Toast.makeText(this, "Status does not allow for adding claims", Toast.LENGTH_LONG).show();
+	public void notAllowed() {
+		Toast.makeText(this, "Status does not allow for adding Items", Toast.LENGTH_LONG).show();
 	}
 	
 	public void onResume() {
 		super.onResume();
+		
 		ListView EIlistview = (ListView) findViewById(R.id.listExpenseItems);
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
 		final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
 		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 		
 		for (int i = 0; i < EIC.size(); i++){
-			if(EIC.get(i).getClaimName() == claim) {
+			if(EIC.get(i).getClaimName().equals(claim)) {
 				EI.add(EIC.get(i));
 			}
 		}
+		
+		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
+		ArrayList<Amt_Cur> TSC = TSController.getTS().getTotalSum(EI);
+		final ArrayList<Amt_Cur> TS = new ArrayList<Amt_Cur>(TSC);
+		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, TS);
+		TSlistview.setAdapter(TSAdapter);
 				
 		final ArrayAdapter<ExpenseItem> ItemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, EI);
 		EIlistview.setAdapter(ItemAdapter);
+		
 		EIController.getItemList().addListener(new Listener() {
 			@Override
 			public void update() {
@@ -175,20 +164,31 @@ public class ItemViewActivity extends Activity {
 				String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 				
 				for (int i = 0; i < EIC.size(); i++){
-					if(EIC.get(i).getClaimName() == claim) {
+					if(EIC.get(i).getClaimName().equals(claim)) {
 						EI.add(EIC.get(i));
 					}
 				}
+				
+				TSController.getTS().getTotalSum(EI);
+				TSController.saveTS();
+				
 				ItemAdapter.notifyDataSetChanged();
+				TSAdapter.notifyDataSetChanged();
 			}
 		});
 		
-		
-//		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
-//		Collection<Amt_Cur> TSC = ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
-//		final ArrayList<Amt_Cur> TS = new ArrayList<Amt_Cur>(TSC);
-//		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, TS);
-//		TSlistview.setAdapter(TSAdapter);
+		EIlistview.setOnItemClickListener(new OnItemClickListener()
+		{ 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3)
+			{
+				Intent intent = new Intent(ItemViewActivity.this, ExpenseItemActivity.class);
+				intent.putExtra("claimposition", index);
+				intent.putExtra("itemposition", arg2);
+				startActivity(intent);
+			}
+		});
 	}
     
 

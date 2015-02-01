@@ -35,8 +35,10 @@ public class AddItemActivity extends Activity {
 		setContentView(R.layout.add_expense_item);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
+		TSManager.initManager(this.getApplicationContext());
 		
-		index = getIntent().getIntExtra("position", 0);
+		index = getIntent().getIntExtra("claimposition", 0);
+		Toast.makeText(this, ClaimListController.getClaimList().getClaims().get(index).getClaimName(), Toast.LENGTH_SHORT).show();
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
@@ -53,14 +55,9 @@ public class AddItemActivity extends Activity {
 				try
 				{
 					addItemAction(v);
-				} catch (ParseException e)
-				{
+				} catch (ParseException e) {
 					e.printStackTrace();
-				} catch (WrongStatusException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}  
+				}
 			}
 		});
     }
@@ -96,7 +93,7 @@ public class AddItemActivity extends Activity {
 		return true;
 	}
 	
-	public void addItemAction(View v) throws ParseException, WrongStatusException {
+	public void addItemAction(View v) throws ParseException {
 		EditText itemname = (EditText) findViewById(R.id.editEnterItemName);
 		EditText category = (EditText) findViewById(R.id.editEnterCategory);
 		EditText description = (EditText) findViewById(R.id.editEnterDescription);
@@ -111,31 +108,35 @@ public class AddItemActivity extends Activity {
 		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
 		decimalFormat.setParseBigDecimal(true);
 		
-		BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
-		Date date = df.parse(Date.getText().toString());
-		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
-		
-		ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
-		
-		ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
-		ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
-		EIController.getItemList().addItem(item);
-		
-		Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
+		if (EIController.getItemList().getItems().contains(itemname.getText().toString())) {
+			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
+		} else {	
+			BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
+			Date date = df.parse(Date.getText().toString());
+			String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 
-		itemname.setText("");
-		category.setText("");
-		description.setText("");
-		Date.setText("");
-		amount.setText("");
-		currency.setText("");
-		
-		itemname.setHint("Enter Another Item");
-		category.setHint("Enter Category");
-		description.setHint("Enter Description");
-		Date.setHint("Enter Date");
-		amount.setHint("Enter Amount");
-		currency.setHint("Enter Currency");
+			ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
+
+			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
+			ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
+			EIController.getItemList().addItem(item);
+
+			Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
+
+			itemname.setText("");
+			category.setText("");
+			description.setText("");
+			Date.setText("");
+			amount.setText("");
+			currency.setText("");
+
+			itemname.setHint("Enter Another Item");
+			category.setHint("Enter Category");
+			description.setHint("Enter Description");
+			Date.setHint("Enter Date");
+			amount.setHint("Enter Amount");
+			currency.setHint("Enter Currency");
+		}
 	}
 
 }

@@ -1,11 +1,9 @@
 package ca.ualberta.cs.travelapp;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 
 public class ExpenseItemList implements Serializable
@@ -53,59 +51,11 @@ public class ExpenseItemList implements Serializable
 	
 	public boolean contains(ExpenseItem item){
 		for (int i = 0; i < size(); i++) {
-			if (item.getItemName() == EItems.get(i).getItemName()){
+			if (item.getItemName().equals(EItems.get(i).getItemName())){
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	public void editItemName(String oldname, String newname) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setItemName(newname);
-			}
-		}	
-	}
-	
-	public void editDescription(String oldname, String description) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setDescription(description);
-			}
-		}	
-	}
-	
-	public void editCategory(String oldname, String category) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setCategory(category);
-			}
-		}	
-	}
-	
-	public void editDate(String oldname, Date date) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setDate(date);
-			}
-		}	
-	}
-	
-	public void editAmount(String oldname, BigDecimal Amount) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setAmt(Amount);
-			}
-		}	
-	}
-	
-	public void editCurrency(String oldname, String currency) throws WrongStatusException {
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setCur(currency);
-			}
-		}	
 	}
 
 	public void addItem(ExpenseItem item)
@@ -116,7 +66,7 @@ public class ExpenseItemList implements Serializable
 	
 	public boolean contains (String Name) {
 		for (int i = 0; i < size(); i++) {
-			if (EItems.get(i).getItemName() == Name){
+			if (EItems.get(i).getItemName().equals(Name)){
 				return false;
 			}
 		}
@@ -125,7 +75,7 @@ public class ExpenseItemList implements Serializable
 	
 	public void removeItem(String ItemName) {
 		for (int i = 0; i < EItems.size(); i++) {
-			if (EItems.get(i).getItemName() == ItemName) {
+			if (EItems.get(i).getItemName().equals(ItemName)) {
 				EItems.remove(i);
 			}
 		}

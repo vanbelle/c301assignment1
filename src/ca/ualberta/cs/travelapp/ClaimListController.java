@@ -45,7 +45,7 @@ public class ClaimListController
 		getClaimList().sort();
 	}
 
-	public void addClaim(Claim claim) throws ClaimAlreadyExistsException {
+	public void addClaim(Claim claim) {
 		getClaimList().addClaim(claim);
 	}
 }

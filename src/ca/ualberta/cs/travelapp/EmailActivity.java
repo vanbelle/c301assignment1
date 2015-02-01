@@ -1,5 +1,6 @@
 package ca.ualberta.cs.travelapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class EmailActivity extends Activity
 		setContentView(R.layout.activity_email);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
+		TSManager.initManager(this.getApplicationContext());
 		
 		final int index = getIntent().getIntExtra("position", 0);
 
@@ -37,7 +39,7 @@ public class EmailActivity extends Activity
 		String claim = ClaimListController.getClaimList().getClaims().get(index).toString();
 		//String total = ;//TODO
 		for (int i = 0; i < EIController.getItemList().getItems().size(); i++){
-			if (EIController.getItemList().getItems().get(i).getClaimName() == ClaimListController.getClaimList().getClaims().get(index).getClaimName())
+			if (EIController.getItemList().getItems().get(i).getClaimName().equals(ClaimListController.getClaimList().getClaims().get(index).getClaimName()))
 			{
 				item +=EIController.getItemList().getItems().get(index).toEmailString();
 		
@@ -59,11 +61,10 @@ public class EmailActivity extends Activity
 
 		Intent email = new Intent(Intent.ACTION_SEND);
 		// prompts email clients only
-		email.setType("message/rfc822");
-		email.putExtra(Intent.EXTRA_EMAIL, recipient.getText().toString());
-		email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
-		email.putExtra(Intent.EXTRA_TEXT, body.getText().toString());
-		startActivity(Intent.createChooser(email, "Choose an Email Client :"));
+		String uriText = "mailto:"+Uri.encode(recipient.getText().toString())+"?subject="+Uri.encode(subject.getText().toString())+"&body="+Uri.encode(body.getText().toString());
+		Uri uri = Uri.parse(uriText);
+		email.setData(uri);
+		startActivity(Intent.createChooser(email, "Send mail ..."));
 	}
 
 

@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ClaimListManager.initManager(this.getApplicationContext());
         EIManager.initManager(this.getApplicationContext());
+        TSManager.initManager(this.getApplicationContext());
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);

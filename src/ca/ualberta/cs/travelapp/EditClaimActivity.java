@@ -37,6 +37,7 @@ public class EditClaimActivity extends Activity
 		setContentView(R.layout.editclaim);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
+		TSManager.initManager(this.getApplicationContext());
 		
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
@@ -54,7 +55,7 @@ public class EditClaimActivity extends Activity
 	    setDateTimeField();
 	    
 		String status1 = ClaimListController.getClaimList().getClaims().get(index).getStatus();
-		if (status1 != "In Progress" || status1 != "Returned") {
+		if (status1.equals("In Progress") || status1.equals("Returned")) {
 			Toast.makeText(this,"Only Status is Editable", Toast.LENGTH_LONG).show();
 		}
 	    
@@ -72,18 +73,14 @@ public class EditClaimActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
-				if ( status == "In Progress" || status == "Returned") {
+				if (status.equals("In Progress") || status.equals("Returned")) {
 					try
 					{
 						editClaimAction(v);
 					} catch (ParseException e)
 					{
 						e.printStackTrace();
-					} catch (ClaimAlreadyExistsException e)
-					{
-						System.out.println("That Claim Name has already been used");
-						e.printStackTrace();
-					}
+					} 
 				} else {
 					onlyStatus(v);
 				}
@@ -98,7 +95,7 @@ public class EditClaimActivity extends Activity
 		ClaimListController.getClaimList().getClaims().get(index).setStatus(status.getText().toString());
 	}
 	
-	public void editClaimAction(View v) throws ParseException, ClaimAlreadyExistsException {
+	public void editClaimAction(View v) throws ParseException{
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
 		EditText description = (EditText) findViewById(R.id.EntersetClaimDescription);
@@ -117,9 +114,9 @@ public class EditClaimActivity extends Activity
 		if (ClaimListController.getClaimList().getClaims().contains(claimname.getText().toString())) {
 			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
 		} else {
-			if (claim.getClaimName() != oldName){
+			if (!claim.getClaimName().equals(oldName)){
 				for (int i = 0; i < EIController.getItemList().getItems().size(); i++){
-					if (EIController.getItemList().getItems().get(i).getClaimName() == oldName){
+					if (EIController.getItemList().getItems().get(i).getClaimName().equals(oldName)){
 						EIController.getItemList().getItems().get(i).setClaimName(claim.getClaimName());
 					}
 				}

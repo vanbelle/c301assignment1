@@ -27,12 +27,7 @@ public class ClaimList implements Serializable {
 		return listeners;
 	}
 	
-	public void addClaim(Claim claim) throws ClaimAlreadyExistsException {
-		for (int i = 0; i < claimList.size(); i++) {
-			if( claimList.get(i).getClaimName() == claim.getClaimName()) {
-				throw new ClaimAlreadyExistsException();
-			}
-		}
+	public void addClaim(Claim claim) {
 		claimList.add(claim);
 		notifyListeners();
 	}
@@ -48,7 +43,7 @@ public class ClaimList implements Serializable {
 
 	public boolean contains(String claimname) {
 		for (int i = 0; i < claimList.size(); i++) {
-			if (claimList.get(i).getClaimName() == claimname) {
+			if (claimList.get(i).getClaimName().equals(claimname)) {
 				return true;
 			}
 		}

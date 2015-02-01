@@ -35,6 +35,7 @@ public class AddClaimActivity extends Activity
 		setContentView(R.layout.add_claim);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
+		TSManager.initManager(this.getApplicationContext());
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
@@ -58,11 +59,7 @@ public class AddClaimActivity extends Activity
 				} catch (ParseException e)
 				{
 					e.printStackTrace();
-				} catch (ClaimAlreadyExistsException e)
-				{
-					System.out.println("That Claim Name has already been used");
-					e.printStackTrace();
-				}
+				} 
 			}
 		});
     }
@@ -117,34 +114,37 @@ public class AddClaimActivity extends Activity
 	}
 	
 	
-	public void addClaimAction(View v) throws ParseException, ClaimAlreadyExistsException {
+	public void addClaimAction(View v) throws ParseException{
 		EditText claimname = (EditText) findViewById(R.id.EnterClaimName);
 		EditText status = (EditText) findViewById(R.id.editEnterStatus);
 		EditText description = (EditText) findViewById(R.id.EnterDescription);
+		
+		if (ClaimListController.getClaimList().getClaims().contains(claimname.getText().toString())) {
+			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
+		} else {
+			Date start = df.parse(startDate.getText().toString());
+			Date end = df.parse(endDate.getText().toString());	
 
-		Date start = df.parse(startDate.getText().toString());
-		Date end = df.parse(endDate.getText().toString());	
-		
-		ClaimListController ct = new ClaimListController();
-		Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
-		ct.addClaim(claim);
-		ct.sort();
-		ClaimListController.saveClaimList();
-		
-		Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
-		
-		
-		claimname.setText("");
-		status.setText("");
-		description.setText("");
-		startDate.setText("");
-		endDate.setText("");
-		
-		claimname.setHint("Enter Another Claim");
-		status.setHint("Enter Status");
-		description.setHint("Enter Description");
-		startDate.setHint("Enter Start Date");
-		endDate.setHint("Enter End Date");
+			ClaimListController ct = new ClaimListController();
+			Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
+			ct.addClaim(claim);
+			ct.sort();
+			ClaimListController.saveClaimList();
+
+			Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
+
+			claimname.setText("");
+			status.setText("");
+			description.setText("");
+			startDate.setText("");
+			endDate.setText("");
+
+			claimname.setHint("Enter Another Claim");
+			status.setHint("Enter Status");
+			description.setHint("Enter Description");
+			startDate.setHint("Enter Start Date");
+			endDate.setHint("Enter End Date");
+		}
 	}
 
 }

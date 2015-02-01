@@ -44,7 +44,7 @@ public class EIController
 		getItemList().sort();
 	}
 
-	public void addItem(ExpenseItem item) throws ClaimAlreadyExistsException {
+	public void addItem(ExpenseItem item){
 		getItemList().addItem(item);
 	}
 	

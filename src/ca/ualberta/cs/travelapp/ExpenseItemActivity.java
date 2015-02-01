@@ -1,6 +1,7 @@
 package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -25,10 +26,22 @@ public class ExpenseItemActivity extends Activity {
 		setContentView(R.layout.expense_item);
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
+		TSManager.initManager(this.getApplicationContext());
 		
 		final int claimindex = getIntent().getIntExtra("claimposition", 0);
 		final int itemindex = getIntent().getIntExtra("itemposition", 0);
-		ExpenseItem item = ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(itemindex);
+		
+		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
+		final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+		String claim = ClaimListController.getClaimList().getClaims().get(claimindex).getClaimName();
+		
+		for (int i = 0; i < EIC.size(); i++){
+			if(EIC.get(i).getClaimName().equals(claim)) {
+				EI.add(EIC.get(i));
+			}
+		}
+		
+		ExpenseItem item = EI.get(itemindex);
 		
 		TextView displayName = (TextView) findViewById(R.id.textItemName);
 		displayName.setText(item.getItemName());
@@ -64,7 +77,7 @@ public class ExpenseItemActivity extends Activity {
 						String name = ClaimListController.getClaimList().getClaims().get(claimindex).getClaimName();
 						String itemName = EIController.getItemList().getItems().get(itemindex).getItemName();
 						for (int i = 0; i < EIController.getItemList().size(); i++) {
-							if (EIController.getItemList().getItems().get(i).getClaimName() == name && EIController.getItemList().getItems().get(i).getItemName() == itemName) {
+							if (EIController.getItemList().getItems().get(i).getClaimName().equals(name) && EIController.getItemList().getItems().get(i).getItemName().equals(itemName)) {
 								EIController.getItemList().getItems().remove(i);
 							}
 						}

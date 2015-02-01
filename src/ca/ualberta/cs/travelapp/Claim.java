@@ -50,76 +50,7 @@ public class Claim implements Serializable{
 	public int hashCode() {
 		return ("Claim:"+getClaimName()).hashCode();
 	}
-	public void addItem(String ItemName, String Category, String Description, Date Date, BigDecimal Amount, String Currency) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		ExpenseItem Item = new ExpenseItem(ClaimName, ItemName, Category,Description, Date, Amount,Currency);
-		EItems.add(Item);
-		this.getTotalSum();
-	}
-	public void editItemName(String oldname, String newname) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setItemName(newname);
-			}
-		}
-	}
-	public void editDescription(String oldname, String description) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setDescription(description);
-			}
-		}
-	}
-	public void editCategory(String oldname, String category) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setCategory(category);
-			}
-		}
-	}
-	public void editDate(String oldname, Date date) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setDate(date);
-			}
-		}
-	}
-	public void editAmount(String oldname, BigDecimal Amount) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setAmt(Amount);
-			}
-		}
-		this.getTotalSum();
-	}
-	public void editCurrency(String oldname, String currency) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
-		for (int i = 0; i < EItems.size(); i++){
-			if (EItems.get(i).getItemName() == oldname) {
-				EItems.get(i).setCur(currency);
-			}
-		}
-		this.getTotalSum();
-	}
+
 	public ArrayList<ExpenseItem> getEItems() {
 		return EItems;
 	}
@@ -130,7 +61,7 @@ public class Claim implements Serializable{
 			Amt_Cur amtcur = Item.getAmt_Cur();
 			String cur = amtcur.getCurrency();
 			for (int j = 0; j < TotalSum.size(); j++) {
-				if (TotalSum.get(j).getCurrency() == cur) {
+				if (TotalSum.get(j).getCurrency().equals(cur)) {
 					BigDecimal a = TotalSum.get(j).getAmount();
 					BigDecimal sum = a.add(amtcur.getAmount());
 					TotalSum.remove(j);
@@ -147,48 +78,47 @@ public class Claim implements Serializable{
 	public String getClaimName() {
 		return ClaimName;
 	}
-	public void setClaimName(String claimName) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
+	
+	public void setClaimName(String claimName) {
 		this.ClaimName = claimName;
 	}
+	
 	public String getStatus() {
 		return Status;
 	}
+	
 	public void setStatus(String status) {
 		this.Status = status;
 	}
+	
 	public String getDescription() {
 		return Description;
 	}
-	public void setDescription(String description) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
+	
+	public void setDescription(String description) {
 		this.Description = description;
 	}
+	
 	public Date getStartDate() {
 		return StartDate;
 	}
-	public void setStartDate(Date startDate) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
+	
+	public void setStartDate(Date startDate) {
 		this.StartDate = startDate;
 	}
+	
 	public Date getEndDate() {
 		return EndDate;
 	}
-	public void setEndDate(Date endDate) throws WrongStatusException {
-		if (this.Status != "In Progress" || this.Status != "Returned") {
-			throw new WrongStatusException();
-		}
+	
+	public void setEndDate(Date endDate) {
 		this.EndDate = endDate;
 	}
+	
 	public void addItem(ExpenseItem item)
 	{
 		EItems.add(item);
+		this.getTotalSum();
 	}
 }
 	
