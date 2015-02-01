@@ -1,6 +1,7 @@
 package ca.ualberta.cs.travelapp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TSController
 {
@@ -40,7 +41,13 @@ public class TSController
 		}
 	}
 
-	public void check(ExpenseItemList e) {
-		
+	public void addItem(Amt_Cur ac){
+		getTS().add(ac);
+	}
+	
+	public void addAll(ArrayList<Amt_Cur> list){
+		for (int i = 0; i < list.size(); i++) {
+			getTS().add(list.get(i));
+		}
 	}
 }

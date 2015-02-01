@@ -38,7 +38,6 @@ public class AddItemActivity extends Activity {
 		TSManager.initManager(this.getApplicationContext());
 		
 		index = getIntent().getIntExtra("claimposition", 0);
-		Toast.makeText(this, ClaimListController.getClaimList().getClaims().get(index).getClaimName(), Toast.LENGTH_SHORT).show();
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
@@ -118,6 +117,7 @@ public class AddItemActivity extends Activity {
 			ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
 
 			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
+			Toast.makeText(this,ClaimListController.getClaimList().getClaims().get(index).getEItems().get(0).getAmt_Cur().toString(), Toast.LENGTH_LONG).show();
 			ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
 			EIController.getItemList().addItem(item);
 

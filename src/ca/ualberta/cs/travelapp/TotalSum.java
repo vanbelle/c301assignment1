@@ -17,28 +17,59 @@ public class TotalSum implements Serializable
 		this.sum = new ArrayList<Amt_Cur>();
 	}
 	
-	public ArrayList<Amt_Cur> getTotalSum(ArrayList<ExpenseItem> List) {
+	public ArrayList<Amt_Cur> getTotalSum(ArrayList<ExpenseItem> EItems) {
 		this.sum = new ArrayList<Amt_Cur>();
-		for (int i = 0; i < List.size(); i++){
-			ExpenseItem Item = List.get(i);
-			Amt_Cur amtcur = Item.getAmt_Cur();
-			String cur = amtcur.getCurrency();
-			for (int j = 0; j < sum.size(); j++) {
-				if (sum.get(j).getCurrency().equals(cur)) {
-					BigDecimal a = sum.get(j).getAmount();
-					BigDecimal b = a.add(amtcur.getAmount());
-					sum.remove(j);
-					Amt_Cur combined = new Amt_Cur(b, cur);
-					sum.add(combined);				
-				}
-				else {
-					sum.add(amtcur);
-				}
+		ArrayList<Amt_Cur> extra = new ArrayList<Amt_Cur>();
+		for (int i = 0; i < EItems.size(); i++){
+			extra.add(EItems.get(i).getAmt_Cur());
+		}	
+		for (int i = 0; i < extra.size(); i++){
+			String cur = extra.get(i).getCurrency();
+			for (int j = 0; j < Extra.size(); j++) {
+				if (i != j){
+					if (extra.get(j).getCurrency().equals(cur)){
+						Amt_Cur ac = new Amt_Cur(cur)
+						sum.add(object)
+					}
+					if (sum.get(j).getCurrency().equals(cur)) {
+						BigDecimal a = sum.get(j).getAmount();
+						BigDecimal sum2 = a.add(amtcur.getAmount());
+						sum.remove(j);
+						Amt_Cur combined = new Amt_Cur(sum2, cur);
+						sum.add(combined);
+					}
+					else {
+						sum.add(amtcur);
+					}
+				
 			}
-			
 		}
 		notifyListeners();
 		return sum;
+	}
+	
+	public ArrayList<Amt_Cur> getTS(){
+		return sum;
+	}
+	
+	public void add(Amt_Cur ac){
+		sum.add(ac);
+		notifyListeners();
+	}
+	
+	public void remove(int i) {
+		sum.remove(i);
+	}
+	
+	public void remove(Amt_Cur ac){
+		sum.remove(ac);
+	}
+	
+	public void clear(){
+		int s = size();
+		for (int i = 0; i < s; i++) {
+			sum.remove(0);
+		}
 	}
 	
 	public int size() {

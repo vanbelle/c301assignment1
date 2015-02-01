@@ -2,6 +2,7 @@ package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 import android.os.Bundle;
@@ -32,25 +33,25 @@ public class ItemViewActivity extends Activity {
 		TSManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
-		
+
 		index = getIntent().getIntExtra("position", 0);
 		String string = ClaimListController.getClaimList().getClaims().get(index).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(index).getStatus();
 		TextView displayName = (TextView) findViewById(R.id.textClaimName);
 		displayName.setText(string);
-		
+
 		TextView displaydescription = (TextView) findViewById(R.id.textClaimDescription);
 		String s = ClaimListController.getClaimList().getClaims().get(index).getDescription();
 		displaydescription.setText(s);
-		
+
 		TextView displayDate = (TextView) findViewById(R.id.textStarttoEndDate);
 		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getStartDate());
 		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getEndDate());
 		displayDate.setText(startdate+" - "+endDate);
-		
+
 		//add new expense item button
-        Button itembutton = (Button) findViewById(R.id.AddExpenseItemButton);
+		Button itembutton = (Button) findViewById(R.id.AddExpenseItemButton);
 		itembutton.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
@@ -63,9 +64,9 @@ public class ItemViewActivity extends Activity {
 				}
 			}
 		});
-		
+
 		//edit button
-        Button editbutton = (Button) findViewById(R.id.buttonedit);
+		Button editbutton = (Button) findViewById(R.id.buttonedit);
 		editbutton.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -75,9 +76,9 @@ public class ItemViewActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		//email button
-        Button emailbutton = (Button) findViewById(R.id.buttonemail);
+		Button emailbutton = (Button) findViewById(R.id.buttonemail);
 		emailbutton.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -87,13 +88,13 @@ public class ItemViewActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-	
+
 		//Total List
 		ListView totalview = (ListView) findViewById(R.id.listTotalSum);
 		ArrayList<Amt_Cur> total = ClaimListController.getClaimList().getClaims().get(index).getTotalSum();
 		ArrayAdapter<Amt_Cur> totalAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, total);
 		totalview.setAdapter(totalAdapter);
-		
+
 		//Delete Button
 		Button deletebutton = (Button) findViewById(R.id.buttondelete);
 		deletebutton.setOnClickListener(new View.OnClickListener() {
@@ -124,59 +125,49 @@ public class ItemViewActivity extends Activity {
 				adb.show();
 			}
 		});
-	
+
 	}
-	
+
 	public void notAllowed() {
 		Toast.makeText(this, "Status does not allow for adding Items", Toast.LENGTH_LONG).show();
 	}
-	
+
 	public void onResume() {
 		super.onResume();
-		
+
 		ListView EIlistview = (ListView) findViewById(R.id.listExpenseItems);
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
-		final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+		ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
 		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
-		
+
 		for (int i = 0; i < EIC.size(); i++){
 			if(EIC.get(i).getClaimName().equals(claim)) {
 				EI.add(EIC.get(i));
 			}
 		}
-		
-		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
-		ArrayList<Amt_Cur> TSC = TSController.getTS().getTotalSum(EI);
-		final ArrayList<Amt_Cur> TS = new ArrayList<Amt_Cur>(TSC);
-		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, TS);
-		TSlistview.setAdapter(TSAdapter);
-				
+		final ArrayList<ExpenseItem> ei = EI;
 		final ArrayAdapter<ExpenseItem> ItemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, EI);
 		EIlistview.setAdapter(ItemAdapter);
-		
+
 		EIController.getItemList().addListener(new Listener() {
 			@Override
 			public void update() {
-				EI.clear();
-				
+				ei.clear();
+
 				ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
 				final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
 				String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
-				
+
 				for (int i = 0; i < EIC.size(); i++){
 					if(EIC.get(i).getClaimName().equals(claim)) {
 						EI.add(EIC.get(i));
 					}
 				}
-				
-				TSController.getTS().getTotalSum(EI);
-				TSController.saveTS();
-				
+
 				ItemAdapter.notifyDataSetChanged();
-				TSAdapter.notifyDataSetChanged();
 			}
 		});
-		
+
 		EIlistview.setOnItemClickListener(new OnItemClickListener()
 		{ 
 			@Override
@@ -189,8 +180,40 @@ public class ItemViewActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+
+		Collection<Amt_Cur> amounts = TSController.getTS().getTotalSum(ei);
+		Toast.makeText(this, amounts.toString(), Toast.LENGTH_SHORT).show();
+		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
+		final ArrayList<Amt_Cur> list = new ArrayList<Amt_Cur>(amounts);
+		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, list);
+		TSlistview.setAdapter(TSAdapter);
+
+		TSController.getTS().addListener(new Listener()
+		{
+
+			@Override
+			public void update()
+			{
+				list.clear();
+
+				ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
+				ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+				String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
+
+				for (int i = 0; i < EIC.size(); i++){
+					if(EIC.get(i).getClaimName().equals(claim)) {
+						EI.add(EIC.get(i));
+					}
+				}
+
+				Collection<Amt_Cur> amounts = TSController.getTS().getTotalSum(EI);
+				list.addAll(amounts);
+				TSAdapter.notifyDataSetChanged();
+			}
+		});		
+
 	}
-    
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
