@@ -28,7 +28,7 @@ public class EmailActivity extends Activity
 		setContentView(R.layout.activity_email);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
+		//TSManager.initManager(this.getApplicationContext());
 		
 		final int index = getIntent().getIntExtra("position", 0);
 

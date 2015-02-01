@@ -2,7 +2,6 @@ package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class ItemViewActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_expenseitems);
-		TSManager.initManager(this.getApplicationContext());
+		//TSManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
 
@@ -181,14 +180,18 @@ public class ItemViewActivity extends Activity {
 			}
 		});
 
-		Collection<Amt_Cur> amounts = TSController.getTS().getTotalSum(ei);
-		Toast.makeText(this, amounts.toString(), Toast.LENGTH_SHORT).show();
+		TotalSum amounts = new TotalSum();
+		amounts.getTotalSum(ei);
 		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
-		final ArrayList<Amt_Cur> list = new ArrayList<Amt_Cur>(amounts);
+		final ArrayList<Amt_Cur> list = new ArrayList<Amt_Cur>();
+		for (int i = 0; i < amounts.size(); i++) {
+			list.add(amounts.get(i));
+		}
+
 		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, list);
 		TSlistview.setAdapter(TSAdapter);
 
-		TSController.getTS().addListener(new Listener()
+		amounts.addListener(new Listener()
 		{
 
 			@Override
@@ -205,9 +208,14 @@ public class ItemViewActivity extends Activity {
 						EI.add(EIC.get(i));
 					}
 				}
+				
+				TotalSum amounts = new TotalSum();
+				amounts.getTotalSum(ei);
+				final ArrayList<Amt_Cur> list = new ArrayList<Amt_Cur>();
+				for (int i = 0; i < amounts.size(); i++) {
+					list.add(amounts.get(i));
+				}
 
-				Collection<Amt_Cur> amounts = TSController.getTS().getTotalSum(EI);
-				list.addAll(amounts);
 				TSAdapter.notifyDataSetChanged();
 			}
 		});		

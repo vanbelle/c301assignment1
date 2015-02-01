@@ -35,7 +35,6 @@ public class AddItemActivity extends Activity {
 		setContentView(R.layout.add_expense_item);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
 		
 		index = getIntent().getIntExtra("claimposition", 0);
 		

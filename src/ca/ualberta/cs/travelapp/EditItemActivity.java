@@ -39,7 +39,7 @@ public class EditItemActivity extends Activity
 		setContentView(R.layout.edititem);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
+		//TSManager.initManager(this.getApplicationContext());
 		
 		EditText name = (EditText) findViewById(R.id.editsetItemName);
 		EditText category = (EditText) findViewById(R.id.editsetItemCategory);

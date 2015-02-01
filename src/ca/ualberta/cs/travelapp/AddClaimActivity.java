@@ -35,7 +35,6 @@ public class AddClaimActivity extends Activity
 		setContentView(R.layout.add_claim);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    

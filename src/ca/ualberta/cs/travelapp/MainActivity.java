@@ -17,9 +17,11 @@ limitations under the License.
 
 package ca.ualberta.cs.travelapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -43,7 +45,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ClaimListManager.initManager(this.getApplicationContext());
         EIManager.initManager(this.getApplicationContext());
-        TSManager.initManager(this.getApplicationContext());
         
         //to initialize click-ability for claim button
         Button claimbutton = (Button) findViewById(R.id.AddClaimButton);
@@ -88,13 +89,27 @@ public class MainActivity extends Activity {
     
          //Adding parent data
         for (int i = 0; i < ClaimListController.getClaimList().size(); i++){
-        	String string = ClaimListController.getClaimList().getClaims().get(i).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(i).getStatus();
+        	String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(i).getStartDate());
+        	String string = startdate+" "+ClaimListController.getClaimList().getClaims().get(i).getClaimName()+"\n"+ClaimListController.getClaimList().getClaims().get(i).getStatus();
         	claims.add(string);
         	// Adding child data
         	ArrayList<String> children = new ArrayList<String>();
-        	for (int j = 0; i < ClaimListController.getClaimList().getClaims().get(i).getTotalSum().size(); j++){
-        		children.add(ClaimListController.getClaimList().getClaims().get(i).getTotalSum().get(j).toString());
-        	}
+        	
+			ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
+			ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+			String claim = ClaimListController.getClaimList().getClaims().get(i).getClaimName();
+
+			for (int k = 0; k < EIC.size(); k++){
+				if(EIC.get(k).getClaimName().equals(claim)) {
+					EI.add(EIC.get(k));
+				}
+			}
+			
+			TotalSum amounts = new TotalSum();
+			amounts.getTotalSum(EI);
+			for (int j = 0; j < amounts.size(); j++) {
+				children.add(amounts.get(j).toString());
+			}  	
         	claimlist.put(claims.get(i), children); // Header, Child data
         }
      }

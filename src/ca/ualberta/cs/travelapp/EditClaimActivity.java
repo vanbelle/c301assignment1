@@ -37,7 +37,7 @@ public class EditClaimActivity extends Activity
 		setContentView(R.layout.editclaim);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
+		//TSManager.initManager(this.getApplicationContext());
 		
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);

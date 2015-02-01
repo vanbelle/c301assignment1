@@ -17,6 +17,10 @@ public class TotalSum implements Serializable
 		this.sum = new ArrayList<Amt_Cur>();
 	}
 	
+	public Amt_Cur get(int i){
+		return sum.get(i);
+	}
+	
 	public ArrayList<Amt_Cur> getTotalSum(ArrayList<ExpenseItem> EItems) {
 		this.sum = new ArrayList<Amt_Cur>();
 		ArrayList<Amt_Cur> extra = new ArrayList<Amt_Cur>();
@@ -25,23 +29,19 @@ public class TotalSum implements Serializable
 		}	
 		for (int i = 0; i < extra.size(); i++){
 			String cur = extra.get(i).getCurrency();
-			for (int j = 0; j < Extra.size(); j++) {
-				if (i != j){
-					if (extra.get(j).getCurrency().equals(cur)){
-						Amt_Cur ac = new Amt_Cur(cur)
-						sum.add(object)
-					}
+			if (contains(cur)){
+				for (int j = 0; j < size(); j++ ){
 					if (sum.get(j).getCurrency().equals(cur)) {
-						BigDecimal a = sum.get(j).getAmount();
-						BigDecimal sum2 = a.add(amtcur.getAmount());
+						BigDecimal a  = sum.get(j).getAmount();
+						BigDecimal b = extra.get(i).getAmount();
+						BigDecimal c = a.add(b);
+						Amt_Cur both = new Amt_Cur(c,cur);
 						sum.remove(j);
-						Amt_Cur combined = new Amt_Cur(sum2, cur);
-						sum.add(combined);
+						sum.add(both);
 					}
-					else {
-						sum.add(amtcur);
-					}
-				
+				}
+			} else {
+				sum.add(extra.get(i));	
 			}
 		}
 		notifyListeners();

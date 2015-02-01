@@ -26,7 +26,6 @@ public class ExpenseItemActivity extends Activity {
 		setContentView(R.layout.expense_item);
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
-		TSManager.initManager(this.getApplicationContext());
 		
 		final int claimindex = getIntent().getIntExtra("claimposition", 0);
 		final int itemindex = getIntent().getIntExtra("itemposition", 0);
