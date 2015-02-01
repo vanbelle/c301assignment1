@@ -2,7 +2,6 @@ package ca.ualberta.cs.travelapp;
 
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,27 +53,7 @@ public class Claim implements Serializable{
 	public ArrayList<ExpenseItem> getEItems() {
 		return EItems;
 	}
-	public ArrayList<Amt_Cur> getTotalSum() {
-		this.TotalSum = new ArrayList<Amt_Cur>();
-		for (int i = 0; i < EItems.size(); i++){
-			ExpenseItem Item = EItems.get(i);
-			Amt_Cur amtcur = Item.getAmt_Cur();
-			String cur = amtcur.getCurrency();
-			for (int j = 0; j < TotalSum.size(); j++) {
-				if (TotalSum.get(j).getCurrency().equals(cur)) {
-					BigDecimal a = TotalSum.get(j).getAmount();
-					BigDecimal sum = a.add(amtcur.getAmount());
-					TotalSum.remove(j);
-					Amt_Cur combined = new Amt_Cur(sum, cur);
-					TotalSum.add(combined);
-				}
-				else {
-					TotalSum.add(amtcur);
-				}
-			}
-		}
-		return TotalSum;
-	}
+
 	public String getClaimName() {
 		return ClaimName;
 	}
@@ -118,7 +97,6 @@ public class Claim implements Serializable{
 	public void addItem(ExpenseItem item)
 	{
 		EItems.add(item);
-		this.getTotalSum();
 	}
 }
 	
