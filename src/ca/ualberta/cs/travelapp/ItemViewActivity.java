@@ -94,20 +94,21 @@ public class ItemViewActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder adb = new AlertDialog.Builder(ItemViewActivity.this);
-				adb.setMessage("Delete this Claim?");
+				adb.setMessage("Delete this Item?");
 				adb.setCancelable(true);
 				adb.setPositiveButton("Delete", new OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String name = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 						ClaimListController.getClaimList().removeClaim(name);
+						ClaimListController.saveClaimList();
 						for (int i = 0; i < EIController.getItemList().size(); i++) {
 							if (EIController.getItemList().getItems().get(i).getClaimName().equals(name)) {
 								EIController.getItemList().getItems().remove(i);
+								EIController.saveItemList();
 							}
 						}
-						Intent intent = new Intent(ItemViewActivity.this, MainActivity.class);
-						startActivity(intent);
+						Toast.makeText(ItemViewActivity.this,"Claim Deleted \n Return to Previous Page", Toast.LENGTH_LONG).show();
 					}
 				});
 				adb.setNegativeButton("Cancel", new OnClickListener() {
@@ -126,6 +127,19 @@ public class ItemViewActivity extends Activity {
 
 	public void onResume() {
 		super.onResume();
+		
+		String string = ClaimListController.getClaimList().getClaims().get(index).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(index).getStatus();
+		TextView displayName = (TextView) findViewById(R.id.textClaimName);
+		displayName.setText(string);
+
+		TextView displaydescription = (TextView) findViewById(R.id.textClaimDescription);
+		String s = ClaimListController.getClaimList().getClaims().get(index).getDescription();
+		displaydescription.setText(s);
+
+		TextView displayDate = (TextView) findViewById(R.id.textStarttoEndDate);
+		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getStartDate());
+		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getEndDate());
+		displayDate.setText(startdate+" - "+endDate);
 
 		ListView EIlistview = (ListView) findViewById(R.id.listExpenseItems);
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
@@ -171,6 +185,7 @@ public class ItemViewActivity extends Activity {
 					long arg3)
 			{
 				Intent intent = new Intent(ItemViewActivity.this, ExpenseItemActivity.class);
+				//Toast.makeText(ItemViewActivity.this, EIController.getItemList().getItems().toString(), Toast.LENGTH_LONG).show();
 				intent.putExtra("claimposition", index);
 				intent.putExtra("itemposition", arg2);
 				startActivity(intent);

@@ -41,12 +41,12 @@ public class EditClaimActivity extends Activity
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
 		EditText description = (EditText) findViewById(R.id.EntersetClaimDescription);
-		startDate = (EditText) findViewById(R.id.EntersetClaimEndDate);
-		endDate = (EditText) findViewById(R.id.EntersetClaimStartDate);
+		endDate = (EditText) findViewById(R.id.EntersetClaimEndDate);
+		startDate = (EditText) findViewById(R.id.EntersetClaimStartDate);
 		
 		final int index = getIntent().getIntExtra("claimposition", 0);
 		
-	    df = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+	    df = new SimpleDateFormat("MM/ddyyyy", Locale.US);
 	        
         startDate.setInputType(InputType.TYPE_NULL);
         endDate.setInputType(InputType.TYPE_NULL);
@@ -94,9 +94,9 @@ public class EditClaimActivity extends Activity
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
 		EditText description = (EditText) findViewById(R.id.EntersetClaimDescription);
-		EditText startDate = (EditText) findViewById(R.id.EntersetClaimEndDate);
-		EditText endDate = (EditText) findViewById(R.id.EntersetClaimStartDate);
-		df =new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		EditText endDate = (EditText) findViewById(R.id.EntersetClaimEndDate);
+		EditText startDate = (EditText) findViewById(R.id.EntersetClaimStartDate);
+		df =new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 		
 		String oldName = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 		Date start = df.parse(startDate.getText().toString());

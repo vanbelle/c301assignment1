@@ -7,7 +7,6 @@ import java.util.Locale;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpenseItemActivity extends Activity {
 	public int claimindex;
@@ -68,20 +68,14 @@ public class ExpenseItemActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder adb = new AlertDialog.Builder(ExpenseItemActivity.this);
-				adb.setMessage("Delete this Claim?");
+				adb.setMessage("Delete this Item?");
 				adb.setCancelable(true);
 				adb.setPositiveButton("Delete", new OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						String name = ClaimListController.getClaimList().getClaims().get(claimindex).getClaimName();
-						String itemName = EIController.getItemList().getItems().get(itemindex).getItemName();
-						for (int i = 0; i < EIController.getItemList().size(); i++) {
-							if (EIController.getItemList().getItems().get(i).getClaimName().equals(name) && EIController.getItemList().getItems().get(i).getItemName().equals(itemName)) {
-								EIController.getItemList().getItems().remove(i);
-							}
-						}
-						Intent intent = new Intent(ExpenseItemActivity.this, ItemViewActivity.class);
-						startActivity(intent);
+						EIController.getItemList().getItems().remove(itemindex);
+						Toast.makeText(ExpenseItemActivity.this,"Item Deleted \n Return to Previous Page", Toast.LENGTH_LONG).show();
+						EIController.saveItemList();
 					}
 				});
 				adb.setNegativeButton("Cancel", new OnClickListener() {

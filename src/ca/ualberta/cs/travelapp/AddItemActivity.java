@@ -116,8 +116,8 @@ public class AddItemActivity extends Activity {
 			ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
 
 			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
-			Toast.makeText(this,ClaimListController.getClaimList().getClaims().get(index).getEItems().get(0).getAmt_Cur().toString(), Toast.LENGTH_LONG).show();
 			EIController.getItemList().addItem(item);
+			//EIController
 
 			Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
 
