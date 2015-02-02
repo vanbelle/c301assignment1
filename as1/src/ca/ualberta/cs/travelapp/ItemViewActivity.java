@@ -131,15 +131,18 @@ public class ItemViewActivity extends Activity {
 		ListView EIlistview = (ListView) findViewById(R.id.listExpenseItems);
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
 		ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+		final ArrayList<String> EIA = new ArrayList<String>();
 		String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 
 		for (int i = 0; i < EIC.size(); i++){
 			if(EIC.get(i).getClaimName().equals(claim)) {
 				EI.add(EIC.get(i));
+				String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(EIC.get(i).getDate());
+				EIA.add(date+"  "+EIC.get(i).getItemName());
 			}
 		}
 		final ArrayList<ExpenseItem> ei = EI;
-		final ArrayAdapter<ExpenseItem> ItemAdapter = new ArrayAdapter<ExpenseItem>(this, android.R.layout.simple_list_item_1, EI);
+		final ArrayAdapter<String> ItemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, EIA);
 		EIlistview.setAdapter(ItemAdapter);
 
 		EIController.getItemList().addListener(new Listener() {
@@ -148,12 +151,13 @@ public class ItemViewActivity extends Activity {
 				ei.clear();
 
 				ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
-				final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
+				final ArrayList<String> EIA = new ArrayList<String>();
 				String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 
 				for (int i = 0; i < EIC.size(); i++){
 					if(EIC.get(i).getClaimName().equals(claim)) {
-						EI.add(EIC.get(i));
+						String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(EIC.get(i).getDate());
+						EIA.add(date+"  "+EIC.get(i).getItemName());
 					}
 				}
 

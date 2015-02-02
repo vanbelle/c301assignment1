@@ -74,8 +74,7 @@ public class EditClaimActivity extends Activity
 			public void onClick(View v) {
 				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
 				if (status.equals("In Progress") || status.equals("Returned")) {
-					try
-					{
+					try {
 						editClaimAction(v);
 					} catch (ParseException e)
 					{
@@ -92,7 +91,9 @@ public class EditClaimActivity extends Activity
 	
 	public void onlyStatus(View v) {
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
+		Toast.makeText(this, "Only Status is editable", Toast.LENGTH_LONG).show();
 		ClaimListController.getClaimList().getClaims().get(index).setStatus(status.getText().toString());
+		Toast.makeText(this, "Status Changed",Toast.LENGTH_SHORT).show();
 	}
 	
 	public void editClaimAction(View v) throws ParseException{
