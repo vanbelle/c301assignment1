@@ -29,7 +29,6 @@ public class ItemViewActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_expenseitems);
-		//TSManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
 

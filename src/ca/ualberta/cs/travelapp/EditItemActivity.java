@@ -1,5 +1,7 @@
 package ca.ualberta.cs.travelapp;
 
+//calendar view code from http://androidopentutorials.com/android-datepickerdialog-on-edittext-click-event/ 2015/01/26
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

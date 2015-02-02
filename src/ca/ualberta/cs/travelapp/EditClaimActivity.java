@@ -37,7 +37,6 @@ public class EditClaimActivity extends Activity
 		setContentView(R.layout.editclaim);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		//TSManager.initManager(this.getApplicationContext());
 		
 		EditText claimname = (EditText) findViewById(R.id.EntersetClaimName);
 		EditText status = (EditText) findViewById(R.id.editsetClaimStatus);
@@ -54,11 +53,6 @@ public class EditClaimActivity extends Activity
         
 	    setDateTimeField();
 	    
-		String status1 = ClaimListController.getClaimList().getClaims().get(index).getStatus();
-		if (status1.equals("In Progress") || status1.equals("Returned")) {
-			Toast.makeText(this,"Only Status is Editable", Toast.LENGTH_LONG).show();
-		}
-	    
 	    claimname.setText(ClaimListController.getClaimList().getClaims().get(index).getClaimName());
 		status.setText(ClaimListController.getClaimList().getClaims().get(index).getStatus());
 		description.setText(ClaimListController.getClaimList().getClaims().get(index).getDescription());
@@ -72,7 +66,7 @@ public class EditClaimActivity extends Activity
 		{
 			@Override
 			public void onClick(View v) {
-				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus();
+				String status = ClaimListController.getClaimList().getClaims().get(index).getStatus().trim();
 				if (status.equals("In Progress") || status.equals("Returned")) {
 					try {
 						editClaimAction(v);
@@ -102,19 +96,19 @@ public class EditClaimActivity extends Activity
 		EditText description = (EditText) findViewById(R.id.EntersetClaimDescription);
 		EditText startDate = (EditText) findViewById(R.id.EntersetClaimEndDate);
 		EditText endDate = (EditText) findViewById(R.id.EntersetClaimStartDate);
+		df =new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 		
 		String oldName = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
-		ClaimListController.getClaimList().getClaims().remove(index);
-		
 		Date start = df.parse(startDate.getText().toString());
 		Date end = df.parse(endDate.getText().toString());	
 		
 		ClaimListController ct = new ClaimListController();
 		Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
-		
+
 		if (ClaimListController.getClaimList().getClaims().contains(claimname.getText().toString())) {
 			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
 		} else {
+			ClaimListController.getClaimList().getClaims().remove(index);
 			if (!claim.getClaimName().equals(oldName)){
 				for (int i = 0; i < EIController.getItemList().getItems().size(); i++){
 					if (EIController.getItemList().getItems().get(i).getClaimName().equals(oldName)){
@@ -137,6 +131,7 @@ public class EditClaimActivity extends Activity
 			endDate.setText(end2);
 		}
 	}
+
 	
 
     private void setDateTimeField() {

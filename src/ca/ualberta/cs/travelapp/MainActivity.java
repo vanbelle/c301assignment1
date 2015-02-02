@@ -15,6 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+//https://www.youtube.com/watch?v=BkazaAeeW1Q 2015/01/25
+//https://www.youtube.com/watch?v=_h94Kqyc-Ag&src_vid=BkazaAeeW1Q&feature=iv&annotation_id=annotation_114155515 2015/01/25
+
 package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
