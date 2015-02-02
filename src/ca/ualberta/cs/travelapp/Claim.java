@@ -32,7 +32,6 @@ public class Claim implements Serializable{
 	public Date StartDate;
 	public Date EndDate;
 	public ArrayList<ExpenseItem> EItems;
-	public ArrayList<Amt_Cur> TotalSum;
 	
 	public Claim(String ClaimName, Date StartDate, Date EndDate, String Status, String Description) {
 		this.EItems = new ArrayList<ExpenseItem>();
@@ -50,7 +49,8 @@ public class Claim implements Serializable{
 			return false;
 		}
 	}
-
+	
+	//transforms the claim to an emailable string
 	public String toString() {
 		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getStartDate());
 		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(getEndDate());

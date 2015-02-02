@@ -19,7 +19,7 @@ package ca.ualberta.cs.travelapp;
 
 import java.io.IOException;
 
-
+//static way to call the data stored by the claimlist manager
 public class ClaimListController
 {
 

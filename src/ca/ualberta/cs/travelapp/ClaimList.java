@@ -86,6 +86,7 @@ public class ClaimList implements Serializable {
 	 	getListeners().remove(l);
 	}
 
+	//sorts by the start date of a claim
 	public void sort() {
 		Collections.sort(claimList, new Comparator<Claim>() {
 			@Override

@@ -55,13 +55,14 @@ public class AddItemActivity extends Activity {
 		
 		index = getIntent().getIntExtra("claimposition", 0);
 		
-	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+	    df =new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 	    
         Date = (EditText) findViewById(R.id.editEnterDate);    
         Date.setInputType(InputType.TYPE_NULL);
 		
         setDateTimeField();
         
+        //to save any added items
         Button savebutton = (Button) findViewById(R.id.buttonsaveItem);
 		savebutton.setOnClickListener(new View.OnClickListener()
 		{
@@ -77,7 +78,7 @@ public class AddItemActivity extends Activity {
 		});
     }
 		
-		
+	//set calendar module
     private void setDateTimeField() {
         Date.setOnClickListener(new View.OnClickListener()
 		{
@@ -115,7 +116,7 @@ public class AddItemActivity extends Activity {
 		EditText currency = (EditText) findViewById(R.id.editEnterCurr);
 		EditText amount = (EditText) findViewById(R.id.editEnterAmount);
 		
-		// Create a DecimalFormat that fits your requirements
+		// Create a String format for the amount from bigdeciaml
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 		symbols.setGroupingSeparator(',');
 		symbols.setDecimalSeparator('.');
@@ -123,28 +124,32 @@ public class AddItemActivity extends Activity {
 		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
 		decimalFormat.setParseBigDecimal(true);
 		
+		//checks that item name is still available
 		if (EIController.getItemList().getItems().contains(itemname.getText().toString())) {
 			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
-		} else {	
+		} else {
+			//formats date and big decimal into string
 			BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
 			Date date = df.parse(Date.getText().toString());
 			String claim = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 
 			ExpenseItem item= new ExpenseItem(claim, itemname.getText().toString(), category.getText().toString(), description.getText().toString(), date, amt, currency.getText().toString());
-
-			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
+			
+			//add item to claims list expense item and claim list expense item
 			EIController.getItemList().addItem(item);
-			//EIController
+			ClaimListController.getClaimList().getClaims().get(index).getEItems().add(item);
 
 			Toast.makeText(this, "Item Added",Toast.LENGTH_SHORT).show();
-
+			
+			//reset text boxes
 			itemname.setText("");
 			category.setText("");
 			description.setText("");
 			Date.setText("");
 			amount.setText("");
 			currency.setText("");
-
+			
+			//add hints
 			itemname.setHint("Enter Another Item");
 			category.setHint("Enter Category");
 			description.setHint("Enter Description");

@@ -138,53 +138,54 @@ public class EditItemActivity extends Activity
 		if (!itemname.equals(name.getText().toString())) {
 			if (EIController.getItemList().getItems().contains(name)) {
 				Toast.makeText(this, "This Item Name is already being used", Toast.LENGTH_LONG).show();
-			}
-		}
+			} else {
 		
-		int index = 0;
-		for (int i = 0; i < ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().size(); i++){
-			if (ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(i).getItemName().equals(itemname)){
-				index = i;
-			}
-		}
-		if (!ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(0).getItemName().equals(itemname) && index == 0){
-			throw new RuntimeException();
-		}
+				int index = 0;
+				for (int i = 0; i < ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().size(); i++){
+					if (ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(i).getItemName().equals(itemname)){
+						index = i;
+					}
+				}
+				if (!ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(0).getItemName().equals(itemname) && index == 0){
+					throw new RuntimeException();
+				}
 
-		//parses amount into a string from a big decimal
-		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-		symbols.setGroupingSeparator(',');
-		symbols.setDecimalSeparator('.');
-		String pattern = "#,###.##";
-		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
-		decimalFormat.setParseBigDecimal(true);
-		BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
-		
-		//removes old expense item and adds new one
-		EIController EC = new EIController();
-		EIController.getItemList().getItems().remove(item);
-		ExpenseItem Item = new ExpenseItem(cname, name.getText().toString(), category.getText().toString(), description.getText().toString(), start, amt,currency.getText().toString());
-		EC.addItem(Item);
-		EIController.saveItemList();
-		
-		Toast.makeText(this, "Claim Changed",Toast.LENGTH_SHORT).show();
-		
-		//gets new item information
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setItemName(name.getText().toString());
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setAmt(amt);
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setCategory(category.getText().toString());
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setCur(currency.getText().toString());
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setDescription(description.getText().toString());
-		ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setDate(start);
-		
-		//shows uptodate info
-		name.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getItemName());
-		category.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getCategory());
-		description.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getDescription());
-		currency.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getAmt_Cur().getCurrency());
-		amount.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getAmt_Cur().getAmount().toString());
-		String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getDate());
-		Date.setText(date);
+				//parses amount into a string from a big decimal
+				DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+				symbols.setGroupingSeparator(',');
+				symbols.setDecimalSeparator('.');
+				String pattern = "#,###.##";
+				DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+				decimalFormat.setParseBigDecimal(true);
+				BigDecimal amt = (BigDecimal) decimalFormat.parse(amount.getText().toString());
+
+				//removes old expense item and adds new one
+				EIController EC = new EIController();
+				EIController.getItemList().getItems().remove(item);
+				ExpenseItem Item = new ExpenseItem(cname, name.getText().toString(), category.getText().toString(), description.getText().toString(), start, amt,currency.getText().toString());
+				EC.addItem(Item);
+				EIController.saveItemList();
+
+				Toast.makeText(this, "Claim Changed",Toast.LENGTH_SHORT).show();
+
+				//gets new item information
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setItemName(name.getText().toString());
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setAmt(amt);
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setCategory(category.getText().toString());
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setCur(currency.getText().toString());
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setDescription(description.getText().toString());
+				ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).setDate(start);
+
+				//shows uptodate info
+				name.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getItemName());
+				category.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getCategory());
+				description.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getDescription());
+				currency.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getAmt_Cur().getCurrency());
+				amount.setText(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getAmt_Cur().getAmount().toString());
+				String date = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(claimindex).getEItems().get(index).getDate());
+				Date.setText(date);
+			}
+		}
 	}
 	
 	//initializes calendar module

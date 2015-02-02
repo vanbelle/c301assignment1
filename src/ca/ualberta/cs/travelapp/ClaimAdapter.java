@@ -31,6 +31,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+//claim adapter for the expandable list on main activity
 public class ClaimAdapter extends BaseExpandableListAdapter{
 	
 	private Context ctx;
