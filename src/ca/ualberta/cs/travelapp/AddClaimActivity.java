@@ -1,3 +1,20 @@
+/*
+Travel App: Keeps tracks of expenses and claims for various trips.
+
+Copyright [2015] Sarah Van Belleghem vanbelle@ualberta.ca
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package ca.ualberta.cs.travelapp;
 
 import java.text.ParseException;
@@ -38,6 +55,7 @@ public class AddClaimActivity extends Activity
 		
 	    df =new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	    
+	    //intialize empty text spaces
         startDate = (EditText) findViewById(R.id.EnterStartDate);    
         startDate.setInputType(InputType.TYPE_NULL);
         startDate.requestFocus();
@@ -63,6 +81,7 @@ public class AddClaimActivity extends Activity
 		});
     }
 
+	//initialize calendar view
     private void setDateTimeField() {
         startDate.setOnClickListener(new View.OnClickListener()
 		{
@@ -118,12 +137,15 @@ public class AddClaimActivity extends Activity
 		EditText status = (EditText) findViewById(R.id.editEnterStatus);
 		EditText description = (EditText) findViewById(R.id.EnterDescription);
 		
+		//checks that claimname is ok
 		if (ClaimListController.getClaimList().getClaims().contains(claimname.getText().toString())) {
 			Toast.makeText(this, "A claim with that name already exists", Toast.LENGTH_LONG).show();
 		} else {
+			//puts date in string format
 			Date start = df.parse(startDate.getText().toString());
 			Date end = df.parse(endDate.getText().toString());	
 
+			//adds new claim, saves it, sorts it
 			ClaimListController ct = new ClaimListController();
 			Claim claim = new Claim(claimname.getText().toString(), start, end, status.getText().toString(), description.getText().toString());
 			ct.addClaim(claim);
@@ -132,12 +154,14 @@ public class AddClaimActivity extends Activity
 
 			Toast.makeText(this, "Claim Added",Toast.LENGTH_SHORT).show();
 
+			//make text spaces blank for another claim if the user wishes
 			claimname.setText("");
 			status.setText("");
 			description.setText("");
 			startDate.setText("");
 			endDate.setText("");
 
+			//sets hints
 			claimname.setHint("Enter Another Claim");
 			status.setHint("Enter Status");
 			description.setHint("Enter Description");

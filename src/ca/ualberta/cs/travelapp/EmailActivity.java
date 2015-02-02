@@ -47,7 +47,6 @@ public class EmailActivity extends Activity
 		setContentView(R.layout.activity_email);
 		ClaimListManager.initManager(this.getApplicationContext());
 		EIManager.initManager(this.getApplicationContext());
-		//TSManager.initManager(this.getApplicationContext());
 		
 		final int index = getIntent().getIntExtra("claimposition", 0);
 
@@ -55,6 +54,7 @@ public class EmailActivity extends Activity
 		subject = (EditText) findViewById(R.id.subject);
 		body = (EditText) findViewById(R.id.body);
 		
+		//gets claim info
 		String claim = ClaimListController.getClaimList().getClaims().get(index).toString();
 		
 
@@ -62,6 +62,7 @@ public class EmailActivity extends Activity
 		ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
 		String c = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 		
+		//creates a block of text for all the items
 		for (int i = 0; i < EIC.size(); i++){
 			if(EIC.get(i).getClaimName().equals(c)) {
 				EI.add(EIC.get(i));
@@ -72,7 +73,8 @@ public class EmailActivity extends Activity
 				}
 			}
 		}
-
+		
+		//creates a block of text for the total amounts
 		TotalSum amounts = new TotalSum();
 		amounts.getTotalSum(EI);
 		for (int i = 0; i < amounts.size(); i++) {
@@ -82,7 +84,8 @@ public class EmailActivity extends Activity
 				total += amounts.get(i).toString()+"\n";
 			}
 		}
-
+		
+		//combines claim total and expense item info into one email text  block
 		body.setText(claim+"Total:"+"\n"+total+"\n"+item);
 
 		Button sendBtn = (Button) findViewById(R.id.sendEmail);
@@ -96,9 +99,8 @@ public class EmailActivity extends Activity
 	}
 
 	protected void sendEmail() {
-
+		//sends the email
 		Intent email = new Intent(Intent.ACTION_SENDTO);
-		// prompts email clients only
 		String uriText = "mailto:"+Uri.encode(recipient.getText().toString())+"?subject="+Uri.encode(subject.getText().toString())+"&body="+Uri.encode(body.getText().toString());
 		Uri uri = Uri.parse(uriText);
 		email.setData(uri);

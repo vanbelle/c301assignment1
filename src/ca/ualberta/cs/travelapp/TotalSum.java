@@ -38,6 +38,7 @@ public class TotalSum implements Serializable
 		return sum.get(i);
 	}
 	
+	// given an array list of expense items getTotalSum computes the sum for all common currencies and returns a list
 	public ArrayList<Amt_Cur> getTotalSum(ArrayList<ExpenseItem> EItems) {
 		this.sum = new ArrayList<Amt_Cur>();
 		ArrayList<Amt_Cur> extra = new ArrayList<Amt_Cur>();

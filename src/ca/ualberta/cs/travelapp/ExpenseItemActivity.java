@@ -1,3 +1,20 @@
+/*
+Travel App: Keeps tracks of expenses and claims for various trips.
+
+Copyright [2015] Sarah Van Belleghem vanbelle@ualberta.ca
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
@@ -27,9 +44,11 @@ public class ExpenseItemActivity extends Activity {
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
 		
+		//gets indexes for claim and expense item lists
 		final int claimindex = getIntent().getIntExtra("claimposition", 0);
 		final int itemindex = getIntent().getIntExtra("itemposition", 0);
 		
+		//gets the list of expense items corresponding to the particular claim
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
 		final ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
 		String claim = ClaimListController.getClaimList().getClaims().get(claimindex).getClaimName();
@@ -39,9 +58,10 @@ public class ExpenseItemActivity extends Activity {
 				EI.add(EIC.get(i));
 			}
 		}
-		
+		//gets item at itemindex
 		ExpenseItem item = EI.get(itemindex);
 		
+		//displays info pertaining to that item 
 		TextView displayName = (TextView) findViewById(R.id.textItemName);
 		displayName.setText(item.getItemName());
 		
@@ -64,7 +84,8 @@ public class ExpenseItemActivity extends Activity {
 		//delete button with cancel options
 		Button deletebutton = (Button) findViewById(R.id.buttonitemdelete);
 		deletebutton.setOnClickListener(new View.OnClickListener() {
-
+			
+			//checks that deleting is what you want
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder adb = new AlertDialog.Builder(ExpenseItemActivity.this);

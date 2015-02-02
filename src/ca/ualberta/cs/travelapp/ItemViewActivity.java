@@ -1,3 +1,20 @@
+/*
+Travel App: Keeps tracks of expenses and claims for various trips.
+
+Copyright [2015] Sarah Van Belleghem vanbelle@ualberta.ca
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package ca.ualberta.cs.travelapp;
 
 import java.text.SimpleDateFormat;
@@ -32,21 +49,9 @@ public class ItemViewActivity extends Activity {
 		EIManager.initManager(this.getApplicationContext());
 		ClaimListManager.initManager(this.getApplicationContext());
 
-		index = getIntent().getIntExtra("position", 0);
-		String string = ClaimListController.getClaimList().getClaims().get(index).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(index).getStatus();
-		TextView displayName = (TextView) findViewById(R.id.textClaimName);
-		displayName.setText(string);
+		index = getIntent().getIntExtra("position", 0); //gets claim index position
 
-		TextView displaydescription = (TextView) findViewById(R.id.textClaimDescription);
-		String s = ClaimListController.getClaimList().getClaims().get(index).getDescription();
-		displaydescription.setText(s);
-
-		TextView displayDate = (TextView) findViewById(R.id.textStarttoEndDate);
-		String startdate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getStartDate());
-		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getEndDate());
-		displayDate.setText(startdate+" - "+endDate);
-
-		//add new expense item button
+		//adds new clickable expense item button
 		Button itembutton = (Button) findViewById(R.id.AddExpenseItemButton);
 		itembutton.setOnClickListener(new View.OnClickListener() {
 
@@ -58,12 +63,12 @@ public class ItemViewActivity extends Activity {
 					intent.putExtra("claimposition", index);
 					startActivity(intent);
 				} else {
-					notAllowed();
+					Toast.makeText(ItemViewActivity.this, "Status does not allow for adding Items", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
 
-		//edit button
+		//clickable edit button takes user to edit Claim page
 		Button editbutton = (Button) findViewById(R.id.buttonedit);
 		editbutton.setOnClickListener(new View.OnClickListener()
 		{
@@ -75,7 +80,7 @@ public class ItemViewActivity extends Activity {
 			}
 		});
 
-		//email button
+		//clickable email button, takes user to email page
 		Button emailbutton = (Button) findViewById(R.id.buttonemail);
 		emailbutton.setOnClickListener(new View.OnClickListener()
 		{
@@ -87,11 +92,11 @@ public class ItemViewActivity extends Activity {
 			}
 		});
 
-		//Delete Button
+		//initializes Delete Button
 		Button deletebutton = (Button) findViewById(R.id.buttondelete);
 		deletebutton.setOnClickListener(new View.OnClickListener() {
 
-			@Override
+			@Override // checks that the user does indeed want to delete their claim
 			public void onClick(View v) {
 				AlertDialog.Builder adb = new AlertDialog.Builder(ItemViewActivity.this);
 				adb.setMessage("Delete this Item?");
@@ -102,6 +107,7 @@ public class ItemViewActivity extends Activity {
 						String name = ClaimListController.getClaimList().getClaims().get(index).getClaimName();
 						ClaimListController.getClaimList().removeClaim(name);
 						ClaimListController.saveClaimList();
+						//deletes all expense items associated with this claim
 						for (int i = 0; i < EIController.getItemList().size(); i++) {
 							if (EIController.getItemList().getItems().get(i).getClaimName().equals(name)) {
 								EIController.getItemList().getItems().remove(i);
@@ -121,13 +127,10 @@ public class ItemViewActivity extends Activity {
 
 	}
 
-	public void notAllowed() {
-		Toast.makeText(this, "Status does not allow for adding Items", Toast.LENGTH_LONG).show();
-	}
-
 	public void onResume() {
 		super.onResume();
 		
+		//lists all the claim info
 		String string = ClaimListController.getClaimList().getClaims().get(index).getClaimName()+" - "+ClaimListController.getClaimList().getClaims().get(index).getStatus();
 		TextView displayName = (TextView) findViewById(R.id.textClaimName);
 		displayName.setText(string);
@@ -141,6 +144,7 @@ public class ItemViewActivity extends Activity {
 		String endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(ClaimListController.getClaimList().getClaims().get(index).getEndDate());
 		displayDate.setText(startdate+" - "+endDate);
 
+		//finds the list of expense items pertaining to this claim
 		ListView EIlistview = (ListView) findViewById(R.id.listExpenseItems);
 		ArrayList<ExpenseItem> EIC = EIController.getItemList().getItems();
 		ArrayList<ExpenseItem> EI = new ArrayList<ExpenseItem>();
@@ -157,7 +161,8 @@ public class ItemViewActivity extends Activity {
 		final ArrayList<ExpenseItem> ei = EI;
 		final ArrayAdapter<String> ItemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, EIA);
 		EIlistview.setAdapter(ItemAdapter);
-
+		
+		//adds a listener to the item list
 		EIController.getItemList().addListener(new Listener() {
 			@Override
 			public void update() {
@@ -177,7 +182,8 @@ public class ItemViewActivity extends Activity {
 				ItemAdapter.notifyDataSetChanged();
 			}
 		});
-
+		
+		//when item is clicked it goes to the corresponding item page
 		EIlistview.setOnItemClickListener(new OnItemClickListener()
 		{ 
 			@Override
@@ -185,13 +191,13 @@ public class ItemViewActivity extends Activity {
 					long arg3)
 			{
 				Intent intent = new Intent(ItemViewActivity.this, ExpenseItemActivity.class);
-				//Toast.makeText(ItemViewActivity.this, EIController.getItemList().getItems().toString(), Toast.LENGTH_LONG).show();
 				intent.putExtra("claimposition", index);
 				intent.putExtra("itemposition", arg2);
 				startActivity(intent);
 			}
 		});
 
+		//computes the total sum corresponding to the expense item list
 		TotalSum amounts = new TotalSum();
 		amounts.getTotalSum(ei);
 		ListView TSlistview = (ListView) findViewById(R.id.listTotalSum);
@@ -203,6 +209,7 @@ public class ItemViewActivity extends Activity {
 		final ArrayAdapter<Amt_Cur> TSAdapter = new ArrayAdapter<Amt_Cur>(this, android.R.layout.simple_list_item_1, list);
 		TSlistview.setAdapter(TSAdapter);
 
+		//add a listener to the total list
 		amounts.addListener(new Listener()
 		{
 
